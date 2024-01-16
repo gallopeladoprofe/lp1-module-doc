@@ -2458,3 +2458,86 @@ La salida en consola es:
 Found her!
 false
 ```
+
+¿Por qué crees que el `&& someArray.length > 0` se agregó en la condición del `while`? Si no lo hacemos quedaremos atascados en algo llamado bucle infinito, entonces nos aseguramos que mientras `notFound` sea `true` el array vaya siendo descontado de a uno usando `.shift()`, en algún momento se acabarán los elementos del array o si se encuentra antes un elemento que sea válido en el if, la condición `notFound` sea falsa.
+
+Podríamos seguir haciendo cosas más sofisticadas fácilmente con bucles. Veamos que tan fácil es llenar un array usando la *secuencia de Fibonacci*:
+
+```javascript
+let nr1 = 0;
+let nr2 = 1;
+let temp;
+fibonacciArray = [];
+while (fibonacciArray.length < 25) {
+    fibonacciArray.push(nr1);
+    temp = nr1 + nr2;
+    nr1 = nr2;
+    nr2 = temp;
+}
+```
+
+En consola:
+```
+[
+0,
+1,
+1,
+2,
+3,
+5,
+8,
+13,
+21,
+34,
+55,
+89,
+144,
+233,
+377,
+610,
+987, 1597, 2584, 4181,
+6765, 10946, 17711, 28657, 46368
+]
+```
+
+#### Ejercicio 5.1
+En este ejercicio vamos a crear un juego para adivinar el número que toma el ususario y responder basado en qué tan preciso el usuario fue.
+1. Crear una variable para almacenar el valor max del número a adivinar.
+2. Crear una variable para almacenar un valor random usando `Math.floor(Math.random() * max) + 1`.
+3. Si hace falta, mostrar en consola para ver como genera el paso 2.
+4. Crear una variable para ser utilizada como seguimiento si la respuesta es correcta o no y setearlo como Boolean false. Podemos actualizarlo a true si el usuario acierta.
+5. Usar el `while` para iterar un prompt que pregunte al usuario para que ingrese un número entre 1 y 5, convierta a Number para compararlo con el número random.
+6. Dentro del `while`, revisar si está usando una condición si el valor del prompt es igual a la solución. Aplicar la lógica que si el número es correcto, puedes setear el status de true y romper el while. Proveer al jugado alguna pista de como adivinar, si ha sido alto o bajo, e iniciar otro propmt hasta que el usuario haya adivinado correctamente. De esta manera podemos usar un loop para mantener preguntando hasta que la solución sea correcta, y en ese punto poder para la iteración de nuestro código.
+
+### do while
+En algunos casos, necesitamos ejecutar el bloque de código almenos una vez. Por ejemplo, si necesitamos validar el input de un usuario, hay que preguntar al menos una vez. Tambié si querer conectarnos a una base de datos o alguno recurso externo. Ejemplo:
+
+```javascript
+do {
+// code to be executed if the condition is true
+} while (condition);
+```
+
+Un ejemplo con prompt:
+
+```javascript
+let number;
+do {
+    number = prompt("Please enter a number between 0 and 100: ");
+} while (!(number >= 0 && number < 100));
+```
+
+La salida será:
+
+```
+Please enter a number between 0 and 100: > -50
+Please enter a number between 0 and 100: > 150
+Please enter a number between 0 and 100: > 34
+```
+
+#### Ejercicio 5.2
+En este ejercicio vamos a crear un contador básico que incrementa dinámicamente una variable consistiendo en un valor
+1. Inicia una variable contado con 0
+2. Crear una variable, step, para incrementar tu contador
+3. Agrega al `do while`, imprimiento el contador para la consola incrementando el step en cada loop
+4. Continuar el loop hasta que el contador sea igual a 100 o mayor a 100.
