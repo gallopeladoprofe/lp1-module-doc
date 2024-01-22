@@ -2786,3 +2786,187 @@ Hay alguna limitaciones aqui, no podremos modificar el array, pero podríamos es
 1. Crear un array vacío
 2. Ejecutarlo 10 veces, incrementando el valor del array
 3. Mostrar en consola
+
+### Loops y objetos
+También se pueden iterar los objetos:smirk:, en este caso usaremos el `for in loop`.
+
+### for in
+Manipular objeto con loops puede ser una variación del `for of`, el **for in**. El `for in` es parecido al anterior. Otra vez, necesitamos especificar una variable temporar, también referida como la key, para cada guardar cada propiedad del valor en el. Ejemplo:
+
+```javascript
+let car = {
+    model: "Golf",
+    make: "Volkswagen",
+    year: 1999,
+    color: "black",
+};
+for (let prop in car){
+    console.log(car[prop]);
+}
+```
+
+En consola:
+```javascript
+Golf
+Volkswagen
+1999
+black
+```
+
+Si sólo mostramos la propiedad, como esto:
+```javascript
+for (let prop in car){
+    console.log(prop);
+}
+```
+
+#### Ejercicio 5.7
+En este ejercicio vamos a estar probando este for:
+1. Crear un objeto simple con tres ítems dentro.
+2. Usando el `for in`, traer las propiedades y valores del objeto y mostrar en consola.
+3. Crear un array conteniendo los mismos tres ítems. Usando el `for` normal o el `for in`, mostrar en consola.
+
+### Convirtiendo e iterando objetos para arrys
+Se puede hacer asi:
+- Convertir las keys de un objeto en array
+- Convertir los valores de un objeto en array
+- Convertir los key-values a un array
+
+Ejemplo:
+
+```javascript
+let car = {
+    model: "Golf",
+    make: "Volkswagen",
+    year: 1999,
+    color: "black",
+};
+
+let arrKeys = Object.keys(car);
+console.log(arrKeys); // muestra [ 'model', 'make', 'year', 'color' ]
+
+// Podemos iterarlo para mostrar las keys
+for(let key of Object.keys(car)) {
+    console.log(key);
+}
+
+// Podemos iterarlo para mostrar los valores
+for(let key of Object.values(car)) {
+    console.log(key);
+}
+
+// Podemos usar la forma anterior y básica, pero algo complicada
+let arrKeys = Object.keys(car);
+for(let i = 0; i < arrKeys.length; i++) {
+    console.log(arrKeys[i] + ": " + car[arrKeys[i]]);
+}
+
+
+// Podemos hacer lo mismo, pero usando entries:
+let arrEntries = Object.entries(car);
+console.log(arrEntries);
+
+// Entries retorna un array de 2 dimensiones, con pares key-value
+for (const [key, value] of Object.entries(car)) {
+    console.log(key, ":", value);
+}
+```
+
+### break y continue
+Como sus nombres lo indican el break para el bucle y el continue lo prosigue:
+
+Usemos esta variable:
+```javascript
+let cars = [
+{
+        model: "Golf",
+        make: "Volkswagen",
+        year: 1999,
+        color: "black",
+    },
+    {
+        model: "Picanto",
+        make: "Kia",
+        year: 2020,
+        color: "red",
+    },
+    {
+        model: "Peugeot",
+        make: "208",
+        year: 2021,
+        color: "black",
+    },
+    {
+        model: "Fiat",
+        make: "Punto",
+        year: 2020,
+        color: "black",
+    }
+];
+```
+
+#### Usando el break:
+
+```javascript
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+    if (i === 4) {
+        break;
+    }
+}
+```
+
+Si el color del auto es "black":
+
+```javascript
+for (let i = 0; i < cars.length; i++) {
+    if (cars[i].year >= 2020) {
+        if (cars[i].color === "black") {
+            console.log("I have found my new car:", cars[i]);
+            break;
+        }
+    }
+}
+```
+
+#### Usando el continue
+
+```javascript
+for (let car of cars){
+    if(car.color !== "black"){
+        continue;
+    }
+    if (car.year >= 2020) {
+        console.log("we could get this one:", car);
+    }
+}
+```
+
+#### Ejercicio 5.8
+1. Practicar cada uno de los ejercicios
+2. Escribir en un index y un script
+3. Mostrarlos en consola
+4. Subir a Github
+
+#### Prueba
+1. ¿Qué se muestra aqui?
+```javascript
+let step = 3;
+for (let i = 0; i < 1000; i += step) {
+    if (i > 10) {
+        break;
+    }
+    console.log(i);
+}
+```
+
+2. ¿Cuál es el valor final de `myArray`, que se muestra en consola?
+```javascript
+const myArray = [1,5,7];
+for(el in myArray){
+    console.log(Number(el));
+    el = Number(el) + 5;
+    console.log(el);
+}
+console.log(myArray);
+```
