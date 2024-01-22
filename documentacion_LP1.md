@@ -2970,3 +2970,142 @@ for(el in myArray){
 }
 console.log(myArray);
 ```
+
+## Capítulo 6 - Funciones
+Las funciones son un gran bloque de construcción que reducirá un montón de código en tu app. Puedes llamar a una función en cualquier momento, puedes escribirla como una especie de template con variables. Dependiendo de como se escriba, puede ser reusado en multitud de situaciones.
+
+En este capítulo vamos a ver los siguientes temas:
+- Funciones básicas
+- Argumentos en funciones
+- Return
+- Scope o contexto de variable en funciones
+
+### Funciones básicas
+Ya hemos visto funciones desde hace rato. Recuerda a `prompt()`, `console.log()`, `push()` y `sort()`. Ellas son funciones. las funciones son un grupo de sentencias, declaración de variables, loops y un gran montón de cosas juntas.
+Llamar a una función significa que un grupo entero de sentencias o líneas de código serán ejecutadas.
+
+### Invocando funciones
+Podemos reconocer funciones por el párentesis de inicio y cierre `()`. Invocarlas es:
+```javascript
+nameOfTheFunction();
+functionThatTakesInput("the input", 5, true);
+```
+Estamos invocando a `nameOfTheFunction` sin argumentos, y a otra función `functionThatTakesInput` que tiene tres argumentos.
+
+### Escribiendo funciones
+Escribir una función puede hacerse con una palabra clave. Ejemplo:
+```javascript
+function nameOfTheFunction() {
+    //contenido de la funcion
+}
+
+// Y para llamarla
+nameOfTheFunction();
+```
+
+Vamos a escribir una función que te salude:
+```javascript
+function sayHello() {
+    let you = prompt("What's your name? ");
+    console.log("Hello", you + "!");
+}
+
+//llamarla
+sayHello(); // muestra: What's your name? >
+```
+
+Ahh, ¿Pueden las variables contener funciones?... pos si:kissing:
+```javascript
+let varContainingFunction = function() {
+    let varInFunction = "I'm in a function.";
+    console.log("hi there!", varInFunction);
+};
+
+// invocar
+varContainingFunction();
+```
+
+Las variables contienen cierto valor y *son* algo; ellas no *hacen* nada. Las funciones sí son acciones. Ellas son un montón de sentencias que pueden ser ejecutadas cuando son llamadas. Javascript no va ejecutarlas si no son invocadas.
+
+### Nombrado de funciones
+Recuerda:
+- Usa el *camelCase* para tus funciones, es más fácil de leer e identificar funciones.
+- Nombres descriptivos, siempre es mejor: ej.: `sumarNumeros` que simplemente llamarmo `miFuncion`
+- Usar un verbo que describa lo que hace la función: hacer una acción. Ej.: en vez de `Hola`, llamar `decirHola`
+
+#### Ejercicio 6.1
+1. Crear una función que tome dos parámetros, suma estas dos y retorna el resultado
+2. Crear dos variables con dos valores diferentes.
+3. Usa la función con las dos variables creadas, muestra el resultado en consola.
+4. Crear una segunda llamada a la función usando dos numeros diferentes.
+
+#### Ejercicio 6.2
+Vamos a crear un programa que randómicamente describe un numero ingresado.
+1. Crear un array con palabras descriptivas.
+2. Crear una función que contenga el `prompt()` preguntando por el nombre ingresado.
+3. Seleccionar números random del array usando `Math.random()`.
+4. Muestra el resultado del prompt y el valor seleccionado del array.
+5. Invoca la función.
+
+### Parámetros y argumentos
+Ambos términos son comúnmente usandos para significar que información es pasada a una función
+```javascript
+function tester(para1, para2){
+    return para1 + " " + para2;
+}
+const arg1 = "argument 1";
+const arg2 = "argument 2";
+tester(arg1, arg2);
+```
+
+Un parámetro es definido como una variable listada dentro de los paréntesis de la definición de una función, el cual define el scope de la función:
+```javascript
+function myFunc(param1, param2) {
+    // code of the function;
+}
+```
+
+```javascript
+function addTwoNumbers(x, y) {
+    console.log(x + y);
+}
+
+//invocarla
+addTwoNumbers(1,1);
+addTwoNumbers(8,36);
+```
+
+Otros ejemplos conocidos:
+```javascript
+console.log("this is an argument");
+prompt("argument here too");
+let arr = [];
+arr.push("argument");
+```
+
+#### Ejercicio 6.3
+Crear una calculadora básica que tome dos números y un string que indique el tipo de operacion. El resultado de esta función debe ser mostrado en consola invocando con sus diferentes operaciones.
+- sumar
+- restar
+- multiplicar
+- dividir
+
+### Parámetros por defecto o no adecuados
+¿Qué pasa sin llamamos a `addTwoNumbers()` sin argumentos? Piensa un momento.
+
+Algunos lenguajes van a hacer crash, pero no en Javascript. Javascript da automáticamente el tipo de variable por defecto que es undefined. Y `undefined + undefined` es igual a `NaN`.
+
+En vez de eso, podemos decir a Javascript que tome parámetros por defecto:
+```javascript
+function addTwoNumbers(x = 2, y = 3) {
+    console.log(x + y);
+}
+
+//invócalas en tu consola
+addTwoNumbers();
+addTwoNumbers(6, 6);
+addTwoNumbers(10);
+
+// ¿Y si hacemos esto?
+addTwoNumbers(1,2,3,4);
+```
