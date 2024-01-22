@@ -2541,3 +2541,73 @@ En este ejercicio vamos a crear un contador básico que incrementa dinámicament
 2. Crear una variable, step, para incrementar tu contador
 3. Agrega al `do while`, imprimiento el contador para la consola incrementando el step en cada loop
 4. Continuar el loop hasta que el contador sea igual a 100 o mayor a 100.
+
+### for loops
+**for loops** son un tipo especial de bucle. La sintaxis podría ser un poco confusa al principio, pero solo al principio. En realidad son muy útiles.
+
+Un ejemplo:
+
+```javascript
+for (initialize variable; condition; statement) {
+// code to be executed
+}
+```
+
+Dentro de los paréntesis del `for`, hay tres partes separadas por `;`. Lo primero inicializa las variables que pueden ser usadas dentro del `for loop`. Lo segundo es una condición: si la condición es `true`, entonces el loop continuará. Esta condición será revisada despues de la inicialización de las variables antes de la primera interación (siempre será así cuando la condición evaluada sea `true`). Por último está la sentencia `i++`, esto se ejecutará en cada iteración:
+1. Inicialización de variables
+2. Revisa la condición
+3. Si la condición es `true`, ejecuta el bloque de código. Si la condición es `false`, terminará el loop
+4. Se ejecuta la sentencia (la tercera parte, por ejemplo `i++`)
+5. Vuelve al paso 2
+
+Un ejemplo:
+```javascript
+for (let i = 0; i < 10; i++) {
+    console.log(i);
+}
+```
+
+Esto mostrará en consola:
+
+```javascript
+[
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+    12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+    24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+    36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+    60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71,
+    72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83,
+    84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
+    96, 97, 98, 99
+]
+```
+
+También podemos crear un array conteniendo solamente valores pares:
+```javascript
+let arr = [];
+for (let i = 0; i < 100; i = i + 2) {
+    arr.push(i);
+}
+```
+
+Resultando en este array:
+```javascript
+[
+    0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20,
+    22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42,
+    44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64,
+    66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86,
+    88, 90, 92, 94, 96, 98
+]
+```
+
+Muy comúnmente, veras `i++` en la tercera parte del loop, pero toma nota que tu puedes escribir cualquier sentencia aqui. En este caso estamos usando `i = i + 2` para agregar 2 al valor previo cada tanto, creando un array con números pares.
+
+#### Ejercicio 5.3
+En este ejercicio vamos a usar un `for loop` para crear un array que almacena objetos. Empezando por crear un array vacío, el bloque de código del loop va crear un objeto que sea insertado en el array.
+1. Crear un array vacio `myWork`.
+2. Usar el `for loop`, crear una lista de 10 objetos, cada objeto tendra numerado (Lección 1, Lección 2, Lección 3...) con una alternativa `status` que sea `true/false` para cada item indicando si la lección será este año, por ejemplo: `name: "Leccion 1", status: true`
+3. Puedes especificar el status usando el operador ternario para revisar si la lección está activa o no.
+4. Push del objeto en `myWork`.
+5. Mostrar en consola.
