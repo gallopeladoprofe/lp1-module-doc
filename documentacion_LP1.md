@@ -2748,3 +2748,41 @@ El programa entrará en *bucle infinito*. Porque a medida que agregas items en n
 2. Ingresar cinco(5) frutas usando el `prompt()` para pedirle al usuario
 3. Guardar cada fruta en el array y salir
 4. Mostrar en consola el resultado
+
+### for of
+Hay otro tipo de loop que podemos usar para iterar elementos de un array: el **for of loop**. No se puede usar para cambiar el valor asociado con el index como hacíamos en el otro for, pero para procesar valores es una opción legible.
+
+Ejemplo de sintaxis:
+
+```javascript
+let arr = [some array];
+for (let variableName of arr) {
+    // code to be executed
+    // value of variableName gets updated every iteration
+    // all values of the array will be variableName once
+}
+```
+
+Se puede leer asi: "Por cada valor del array, llamá a `variableName` y hacé lo siguiente":
+```javascript
+let names = ["Chantal", "John", "Maxime", "Bobbi", "Jair"];
+    for (let name of names){
+    console.log(name);
+}
+```
+En este caso especificamos una variable temporal, llamada `name`. Ella es utilizada para pegar el valor de la *iteración actual*, y luego la siguiente, es reemplazada por el siguiente valor, se muestra en consola:
+
+```javascript
+Chantal
+John
+Maxime
+Bobbi
+Jair
+```
+
+Hay alguna limitaciones aqui, no podremos modificar el array, pero podríamos escribir todos los elementos a una base de datos o archivos, o enviar a algún lado. La ventaja aquí es que no podemos accidentalmente quedarnos en un bucle infinito o ignorando valores.
+
+#### Ejercicio 5.6
+1. Crear un array vacío
+2. Ejecutarlo 10 veces, incrementando el valor del array
+3. Mostrar en consola
