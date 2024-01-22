@@ -2658,5 +2658,93 @@ También podemos graficar como tabla:
 console.table(arrOfArrays);
 ```
 
+### Loops and arrays
+Si no estás convencido de que tan extremadamente útiles son los loops. Los loops o bucles hacen la vida más fácil con arrays.
 
+Podemos combinar la propiedad `length` y la condición de la parte del loop o while:
 
+```javascript
+let arr = [some array];
+for (initialize variable; variable smaller than arr.length; statement)
+{
+    // code to be executed
+}
+```
+
+Ejemplo:
+
+```javascript
+let names = ["Chantal", "John", "Maxime", "Bobbi", "Jair"];
+for (let i = 0; i < names.length; i ++){
+    console.log(names[i]);
+}
+```
+
+Muestra:
+```javascript
+Chantal
+John
+Maxime
+Bobbi
+Jair
+```
+
+También podemos modificar el array:
+
+```javascript
+let names = ["Chantal", "John", "Maxime", "Bobbi", "Jair"];
+for (let i = 0; i < names.length; i ++){
+    names[i] = "hola " + names[i];
+}
+```
+
+Muestra:
+```javascript
+[
+    'hola Chantal',
+    'hola John',
+    'hola Maxime',
+    'hola Bobbi',
+    'hola Jair'
+]
+```
+
+También revisar validaciones dentro:
+```javascript
+let names = ["Chantal", "John", "Maxime", "Bobbi", "Jair"];
+for (let i = 0; i < names.length; i ++){
+    if(names[i].startsWith("M")){
+        delete names[i];
+        continue;
+    }
+    names[i] = "hello " + names[i];
+}
+console.log(names);
+```
+
+Muestra:
+```javascript
+[
+    'hello Chantal',
+    'hello John',
+    <1 empty item>,
+    'hello Bobbi',
+    'hello Jair'
+]
+```
+
+##### ¿Qué piensas de este bloque de código?
+```javascript
+let names = ["Chantal", "John", "Maxime", "Bobbi", "Jair"];
+for (let i = 0; i < names.length; i++){
+    names.push("...");
+}
+```
+
+El programa entrará en *bucle infinito*. Porque a medida que agregas items en names, eso agranda el array y para colmo se analiza en `names.length`, si siempre crece nunca parará de revisarse si es menor que 0
+
+#### Ejercicio 5.4
+1. Crear un array de nombres de frutas
+2. Ingresar cinco(5) frutas usando el `prompt()` para pedirle al usuario
+3. Guardar cada fruta en el array y salir
+4. Mostrar en consola el resultado
