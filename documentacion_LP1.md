@@ -2611,3 +2611,52 @@ En este ejercicio vamos a usar un `for loop` para crear un array que almacena ob
 3. Puedes especificar el status usando el operador ternario para revisar si la lección está activa o no.
 4. Push del objeto en `myWork`.
 5. Mostrar en consola.
+
+### Loops anidados o Nested loops
+A veces es necesario usar un loop dentro de otro loop. Un loop dentro de un loop es llamado *nested loop*. Esta no es la mejor solución al problema. Es un signo que tan pobre está escrito el código ("apesta" el código), pero por ahora es una buena solución:
+
+Ejemplo:
+```javascript
+while (condition 1) {
+    // code that gets executed as long as condition 1 is true
+    // this loop depends on condition 1 being true
+    while (condition 2) {
+        // code that gets executed as long as condition 2 is true
+    }
+}
+```
+
+Un ejemplo agregando arrays:
+```javascript
+let arrOfArrays = [];
+for (let i = 0; i < 3; i++){
+    arrOfArrays.push([]);
+    for (let j = 0; j < 7; j++) {
+        arrOfArrays[i].push(j);
+    }
+}
+```
+
+En consola:
+```javascript
+[
+    [
+        0, 1, 2, 3, 4, 5, 6
+    ],
+    [
+        0, 1, 2, 3, 4, 5, 6
+    ],
+    [
+        0, 1, 2, 3, 4, 5, 6
+    ]
+]
+```
+
+También podemos graficar como tabla:
+
+```javascript
+console.table(arrOfArrays);
+```
+
+
+
