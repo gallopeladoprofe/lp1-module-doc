@@ -1678,9 +1678,9 @@ Podemos probar:
 ### Objetos en Javascript
 Ahora es momento de aprender otra estructura de datos compleja que puede contener mas de un valor: !objetos! Los objetos son muy útiles y puede ser utilizados para describir cosas de la vida real como también conceptos más complejos y abstractos que permiten flexibilidad en tu código.
 
-Secretamente, ya fuiste introducido a los objetos :smirk:, porque los arrays son un tipo especial de objeto. Los Arrays son objetos con *propiedades indexadas*. Todos los obejtos, también los objetos que veremos, son objetos con propiedades nombradas. Esto significa que un en vez de un index numérico generado automáticamente, vamos a crear un propiedad personalizada y *descriptiva*.
+Secretamente, ya fuiste introducido a los objetos :smirk:, porque los arrays son un tipo especial de objeto. Los Arrays son objetos con *propiedades indexadas*. Todos los objetos, también los objetos que veremos, son objetos con propiedades nombradas. Esto significa que un en vez de un index numérico generado automáticamente, vamos a crear un propiedad personalizada y *descriptiva*.
 
-Como podemos ver en el siguiente código, los arrays son definidos por Javascrip siendo de tipo objeto:
+Como podemos ver en el siguiente código, los arrays son definidos por Javascript siendo de tipo objeto:
 
 ```javascript
 let arr = [0, 1, 2];
@@ -3108,4 +3108,100 @@ addTwoNumbers(10);
 
 // ¿Y si hacemos esto?
 addTwoNumbers(1,2,3,4);
+```
+
+### Funciones especiales y operadores
+Hay a menudos formas especiales de escribir funciones, también operadores. Estamos hablando de las funciones flecha y el operador *spread* y *rest*. Las funciones flecha son grandiosas por enviar funciiones como parámetros y usar notaciones más cortas. El operador *spread* nos hace la vida más fácil y flexible cuando enviamos argumentos y trabajar con arrays.
+
+### Funciones flecha
+Las funciones flecha (arrow functions) son una manera especial de escribir funciones que puede se confusa al iniciar.
+Ellas lucen así:
+```javascript
+(param1, param2) => body of the function;
+
+//sin parametros
+() => body of the function;
+
+//O con un parámetro (los paréntesis no son necesarios)
+param => body of the function;
+
+//multilínea con paréntesis
+(param1, param2) => {
+    // line 1;
+    // any number of lines;
+};
+```
+
+Las funciones flecha son útiles si deseas escribir una implementacion en el mismo instante, como dentro de otra función como un parámetro. Esto es porque ellas son una notación corta para escribir funciones. Son más utlizadas en cuando se usan en una sola línea de código o sentencia.
+
+Veamos, reescribir esto a una función flecha:
+```javascript
+function doingStuff(x) {
+    console.log(x);
+}
+
+let doingArrowStuff = x => console.log(x);
+
+//invocarlas
+doingArrowStuff("Great!");
+};
+```
+
+Eso va a mostrar en consola `Great!`. Si hay más de un argumento, vamos a usar paréntesis:
+```javascript
+let addTwoNumbers = (x, y) => console.log(x + y);
+
+//invocar
+addTwoNumbers(5, 3);//va mostrar el número 8
+```
+¿Y si no hay argumentos? Debemos usar el paréntesis:
+```javascript
+let decirHola = () => console.log("hola");
+```
+
+Como ejemplo final, podemos combinar la función flecha con algunos métodos *built-in o preconstruidos*.
+Por ejemplo, podríamos usar `foreach()` sobre un array. Este método ejecuta una cierta función por cada elemento en el array, mira:
+```javascript
+const arr = ["squirrel", "alpaca", "buddy"];
+arr.forEach(e => console.log(e));
+```
+
+La salida en consola:
+```console
+squirrel
+alpaca
+buddy
+```
+
+### Operador spread
+El operador spread. Consiste en tres puntos usados antes de una expresión o string, y propaga los argumentos o elementos de un array:
+Suena un poco complicado, veamos:
+```javascript
+let spread = ["so", "much", "fun"];
+let message = ["JavaScript", "is", ...spread, "and", "very", "powerful"];
+```
+Los valores de ese array convertidos en este:
+```javascript
+['JavaScript', 'is', 'so', 'much', 'fun', 'and', 'very', 'powerful']
+```
+Así como puedes ver, los elementos del operador spread convierte elementos individuales en un array. El operador spread propaga el array para elementos individuales en un nuevo array. También puede ser utilizado para enviar múltiples argumentos a una función:
+```javascript
+function addTwoNumbers(x, y) {
+console.log(x + y);
+}
+let arr = [5, 9];
+addTwoNumbers(...arr);// mostrará 14
+```
+
+Este operador permite tener una copia de un gran array o string en una función, el cual ahorra tiempo y reduce la complejidad. Puedes llamar a una función con múltiples operadores spread, ejemplo:
+```javascript
+function addFourNumbers(x, y, z, a) {
+    console.log(x + y + z + a);
+}
+let arr = [5, 9];
+let arr2 = [6, 7];
+addFourNumbers(...arr, ...arr2); //muestra 27
+
+//la manera clásica
+addFourNumbers(5, 9, 6, 7); //muestra 27
 ```
