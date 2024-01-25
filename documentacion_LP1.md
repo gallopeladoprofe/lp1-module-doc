@@ -1630,7 +1630,7 @@ Ejercicio 3.2
 8. Crea una nueva lista conteniendo `jugo` y `pop`.
 9. Combina ambas listas, agrega la nueva lista dos veces al final de la primera lista.
 10. Obtener el último valor de index de `pop` y muestra en consola.
-11. Tu lista final debería verse así: ```["Bananas", "Carrots", "Lettuce", "Eggs", "Milk", "Juice", "Pop", "Juice", "Pop"]```
+11. Imprime el array resultante en consola.
 
 ### Arrays multidimensionales
 Establecimos que son los arrays y que pueden contener valores de cualquier tipo. Esto significa que los arrays también pueden contener otros arrays (y de paso, estos arrays... otros arrays). Esto es llamado array multidimensional. Suena complicado, pero es solo un array de arrays: una lista de listas:
@@ -3205,3 +3205,13 @@ addFourNumbers(...arr, ...arr2); //muestra 27
 //la manera clásica
 addFourNumbers(5, 9, 6, 7); //muestra 27
 ```
+
+### Operador rest
+Similar que el operador spread, existe el rest. Tiene el mismo símbolo como el operador spread, pero es usado dentro de la función. Recuerdas que pasaría si enviamos un argumento demasiadas veces, como aqui:
+```javascript
+function someFunction(param1, param2) {
+    console.log(param1, param2);
+}
+someFunction("hi", "there!", "How are you?");
+```
+Nada realmente, esto prentendría que solamente se envió dos argumentos y se muestra el *hi there*. Si usasemos el operador rest,
