@@ -3214,4 +3214,227 @@ function someFunction(param1, param2) {
 }
 someFunction("hi", "there!", "How are you?");
 ```
-Nada realmente, esto prentendría que solamente se envió dos argumentos y se muestra el *hi there*. Si usasemos el operador rest,
+Nada realmente, esto prentendría que solamente se envió dos argumentos y se muestra el *hi there*. Si usasemos el operador rest, este permitirá enviar cualquier cantidad de argmentos y traducirlos dentro de una array. Ejemplo:
+
+```javascript
+function someFunction(param1, ...param2) {
+console.log(param1, param2); //muestra hi [ 'there!', 'How are you?' ]
+}
+someFunction("hi", "there!", "How are you?");
+```
+### En construcción - página 127(152 en PDF)
+
+### Capítulo 7 - Clases
+Ya vimos lo que son los objetos, las clases son planos o plantillas para la creación de un objeto.
+Las clases nos adentran a la programación orientada a objetos, el cual es el más importante avance de diseño en el desarrollo de software. Este desarrollo redujo la complejidad de las aplicaciones e incrementa la mantenibilidad un montón.
+
+Entonces, en la programación orientada a objetos y clases son de gran importancia para *computer science* en general. Este no es necesariamente el caso cuando estamos en Javascript. Las clases en Javascript son algo especial comparados con otros lenguajes de programación. Las clases son *envoltorios* con algo de funciones especiales.
+Esto significa que de hecho ellos son una sintaxis alternativa para definir objetos usando una función constructora.
+
+En este capítulo vamos a ver los siguientes temas:
+- Programación orientada a objetos
+- Clases y objetos
+- Clases
+- Herencia(Inheritance)
+- Prototypes
+
+### Programación orientada a objetos
+Antes de empezar hablemos un poco de la POO. La **P**rogramación **O**rientada a **O**bjetos es un paradigma de programación importante donde el código es estructurado en objetos, alineándose para mayor mantenibilidad y hacer código reusable. Trabajar con POO te enseña a tratar de pensar en un montón de temas dentro de los objetos, agrupando propiedades de tal manera que puedan ser *envueltas* en un plano llamado clase. Esto a su vez podría ser propiedades heredadas de una clase padre.
+
+Por ejemplo, si estamos pensando en un animal, puede venir a nosotros ciertas propiedades: nombre, peso, altura, velocidad máxima, color, y muchas cosas. Y luego pensar en especies de peces, podemos reutilizar todas las propiedades de "animal" y agregarlas a algunas propiedades de los peces. Lo mismo para los perros; si pensamos en un perro, podemos reusar las propiedades de "animal" y agregar algunas propiedades específicas de los perros. Esta es la manera de reutilizar código de nuestra clase animal. Y cuando nos demos cuenta que olvidamos una propiedad muy importante de muchos animales en nuestra aplicación, podemos añadirlo a la clase animal.
+
+Esto es muy importante para lenguajes como Java, .Net, y otros clásicos orientados a objeto. Javascript no necesariamente gira en torno a los objetos.
+
+### Clases y objetos
+Así como en el *Capítulo 3, Javascript múltiples valores*. Las propiedades de un objeto son sensibles a los nombres:
+```javascript
+let dog = { dogName: "JavaScript",
+    weight: 2.4,
+    color: "brown",
+    breed: "chihuahua"
+};
+```
+
+Las clases en Javascript encapsulan datos y funciones que son parte de ella. Si creas una clase, puedes luego crear objetos que esa clase usa, ejemplo:
+```javascript
+class ClassName {
+    constructor(prop1, prop2) {
+        this.prop1 = prop1;
+        this.prop2 = prop2;
+    }
+}
+
+let obj = new ClassName("arg1", "arg2");
+```
+
+La palabra reservada *this* significa que la propiedad pertenece al objeto.
+
+Recordemos que las clases son un tipo especial de función sobre la superficie. Podemos crear objetos con esta función también:
+```javascript
+function Dog(dogName, weight, color, breed) {
+    this.dogName = dogName;
+    this.weight = weight;
+    this.color = color;
+    this.breed = breed;
+}
+
+let dog = new Dog("Jacky", 30, "brown", "labrador");
+```
+
+El ejemplo de dog podemos definirno usando la sintaxis especial:
+```javascript
+class Dog {
+    constructor(dogName, weight, color, breed) {
+        this.dogName = dogName;
+        this.weight = weight;
+        this.color = color;
+        this.breed = breed;
+    }
+}
+let dog = new Dog("JavaScript", 2.4, "brown", "chihuahua");
+```
+
+Esto resulta en un objeto con las mismas propiedades. Si lo mostramos en consola, seremos capaces de ver algo como:
+```javascript
+console.log(dog.dogName, "is a", dog.breed, "and weighs", dog.weight,"kg."); //muestra JavaScript is a chihuahua and weighs 2.4 kg.
+```
+
+### Clases
+Te estarás preguntando, si las clases hacen exactamente lo mismo que definiendo un objeto, ¿para qué necesitamos entonces las clases? La respuesta esta en que las clases son esencialmente planos para la construcción de un objeto. Esto quiere decir que necesitamos hacer menos cosas si es que por ejemplo necesitamos 20 perros de la clase perro. Si vamos a crear objetos debemos especificar todos los nombres de propiedades cada vez. Y sería fácil de cometer errores así.
+
+Así como mostramos en las secciones anteriores, usamos la palabra reserada `class` para decirle a Javascript que queremos crear una clase. Luego, darle un nombre. Es la convención para iniciar nombre de clase que estas empiecen con la primer letra en mayúsculas.
+
+#### Constructores
+El constructor es un método especial que usamos para *incializar* objetos con nuestro plano de la clase. *Solamente puede exister un constructor por clase*. Este constructor contiene propiedades que serán seteadas cuando se inicializa la clase.
+
+Un ejemplo:
+```javascript
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+}
+```
+
+Mirando en la superficie, Javascript crea una función especial basada en este constructor. Esta función obtiene el nombre de la clase, luego creará un objeto con dadas propiedades. Con esta función especial, puedes crear instancias(objetos) de la clase.
+
+Aquí se muestra como puedes crear un objeto de la clase `Person`:
+```Javascript
+let p = new Person("Maaike", "van Putten");
+```
+
+La palabra `new` es que dice a Javascript para que mire la función especial constructor en la clase `Person` y crea un nuevo objeto. El constructor es llamado y retorna una instancia del objeto persona con las propiedades específicas. Este objeto es almacenado en la variable `p`.
+Si usamos nuestra variable `p` en el logging, puedes ver las propiedades que se cargaron:
+```javascript
+console.log("Hi", p.firstname); //muestra Hi Maaike
+```
+Que piensas si creamos una clase sin todas esas propiedades:
+```javascript
+let p = new Person("Maaike");
+
+console.log("Hi", p.firstname, p.lastname); //muestra Hi Maaike undefined
+```
+
+Puedes especificar valores por defecto:
+```javascript
+constructor(firstname, lastname = "Doe") {
+    this.firstname = firstname;
+    this.lastname = lastname;
+}
+```
+#### Ejercicio 7.1
+Toma los siguientes ejemplos y crea una clase persona, muestra las instancias de nombres de amigos:
+1. Crear la clase para `Persona` que incluya el constructor para `nombres` y `apellidos`.
+2. Crear una variable y asigna un valor de `new Persona` usando los nombres y apellidos de tus amigos.
+3. Ahora agrega una segunda variable con otro nombre de amigo usando su primer nombre y último nombre
+4. Muestra ambos amigos en consola saludando un "Hola".
+
+#### Métodos
+En una clase, podemos especificar funciones. Esto significa que nuestro objeto puede empezar haciendo cosas usando las propiedades, por ejemplo, mostrando el nombre. Funciones en clases son llamadas *métodos*. Cuando definimos estos métodos, no utilizamos la palabra reservada *function*. Ejemplo:
+
+```javascript
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    greet() {
+        console.log("Hi there! I'm", this.firstname);
+    }
+}
+```
+
+Podemos llamar directamente al método `greet` de un objeto persona así:
+```javascript
+let p = new Person("Maaike", "van Putten");
+p.greet(); //muestra Hi there! I'm Maaike
+```
+
+Puedes especificar los métodos que desees en una clase y como quieras. En este ejemplo, estamos usando `firstname`. Cuando estamos diciendo `this.property`, lo estamos haciendo. Si tenemos una persona con diferente valor de `firstname`, por ejemplo, Rob, será mostrado `Hi there! I'm Rob`.
+
+Así como las funciones, los métodos pueden tener parámetros y retornar resultados:
+```javascript
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    greet() {
+        console.log("Hi there!");
+    }
+    compliment(name, object) {
+        return "That's a wonderful " + object + ", " + name;
+    }
+}
+```
+
+El método `compliment` no muestra nada por si mismo, solamente retorna datos y si queremos verlo, debemos hacer `console.log()`:
+```javascript
+let compliment = p.compliment("Harry", "hat");
+console.log(compliment); //muestra That's a wonderful hat, Harry
+```
+
+#### Ejercicio 7.2
+Trae el nombre completo de tus amigos:
+1. Usando la clase `Persona` del ejercicio 7.1, agrega un método llamado `nombreCompleto`, que retorna la concatenación de `nombres` y `apellidos`.
+2. Crear valores para `persona1` y `persona2` usando datos de dos amigos.
+3. Usando `nombreCompleto` dentro de la clase, retornar el nombre completo de uno o ambas personas.
+
+#### Propiedades
+Las propiedades, a veces son llamados campos, guardan los datos de las clases. Ya lo hemos visto en algunas propiedades, cuando las creamos en nuestro constructor:
+```javascript
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+}
+```
+Aquí, la clase `Person` tiene dos propiedades del constructor: `firstname` y `lastname`. las propiedades pueden ser agregadas y removidas como lo hicmos con los objetos. Estas propiedades puedes ser accesadas desde afuera de la clase, asií como vimos cuando logueamos desde una instancia:
+```javascript
+let p = new Person("Maaike", "van Putten");
+console.log("Hi", p.firstname);
+```
+
+A veces esto no es deseable, el de mostrar o dar acceso directamente. Nosotros queremos que la clase esté bajo control de las propiedades bajo varias razones, quizás queremos validar una propiedad para asegurar cierto valor. Por ejemplo imagina que estamos queriendo valdiar una edad que no sea meno que 18. Podemos lograr esto accediendo haciendo privada la propiedad, usando el símbolo `#`:
+
+```javascript
+class Person {
+    #firstname;
+    #lastname;
+    constructor(firstname, lastname) {
+        this.#firstname = firstname;
+        this.#lastname = lastname;
+    }
+}
+```
+Ahora mismo, `firstname` y `lastname` no pueden ser accedidos desde afuera de la clase. Si pruebas:
+```javascript
+let p = new Person("Maria", "Saga");
+console.log(p.firstname); //muestra undefined
+```
+
+
+### Herencia(Inheritance)
+### Prototypes
