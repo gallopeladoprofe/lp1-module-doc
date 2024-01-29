@@ -3222,7 +3222,65 @@ console.log(param1, param2); //muestra hi [ 'there!', 'How are you?' ]
 }
 someFunction("hi", "there!", "How are you?");
 ```
-### En construcción - página 127(152 en PDF)
+#### Retornando valores de función
+Hay algo muy importante que hace a la funciones muy útiles de los que son: *retornan valores*.
+Las funciones pueden darnos retorno de un resultado cuando lo especificamos.
+El retorno de un valor puede ser almacenado en una variable. ya lo hemos hecho, ¿recuerdas?:
+```javascript
+let materiaFavorita = prompt("¿Cuá es mi materia favorita?");
+```
+Estamos almacenando el resultado de nuestra función `prompt()` en la variable `materiaFavorita`. Veamos otro:
+```javascript
+let result = addTwoNumbers(4, 5);
+console.log(result);
+```
+Se muestra:
+```console
+9
+undefined
+```
+El valor `9` es mostrado porque hay un `console.log()` en `addTwoNumbers()`. Sin embargo con `result` no hay nada, es `undefined`. Cambiemos un poco con esto:
+```javascript
+function addTwoNumbers(x, y) {
+    return x + y;
+}
+```
+Ves, usamos el `return` al final de la función para retornar el valor de la suma de `x + y`. Si ahora vuelves a ejecutar la función de antes, deberá mostrar el `result`.
+
+¿Qué piensas del siguiente bloque de código?
+```javascript
+let resultsArr = [];
+for(let i = 0; i < 10; i ++){
+    let result = addTwoNumbers(i, 2*i);
+    resultsArr.push(result);
+}
+console.log(resultsArr);
+```
+
+Muestra:
+```console
+[
+    0, 3, 6, 9, 12,
+    15, 18, 21, 24, 27
+]
+```
+
+#### Retornando valores con la función flecha
+Ejemplo:
+```javascript
+let addTwoNumbers = (x, y) => x + y;
+
+let result = addTwoNumbers(12, 15);
+console.log(result); //muestra 27
+```
+
+Prueba con esta:
+```javascript
+let addTwoNumbers = (x, y) => {
+    console.log("Adding...");
+    return x + y;
+}
+```
 
 ### Capítulo 7 - Clases
 Ya vimos lo que son los objetos, las clases son planos o plantillas para la creación de un objeto.
