@@ -2280,7 +2280,7 @@ Este juego es de un jugador contra la computadora, si ambos harán selecciones a
 5. Usa condiciones para aplicar la lógica del juego y retornar los resultados correctos
 6. Agrega un nuevo mensaje de salida que muestra la selección del jugador versus la computadora y el resultado del juego
 
-#### Quiz
+#### Quiz 3
 1. ¿Qué se mostrará en la consola?
 
 ```javascript
@@ -3576,3 +3576,95 @@ class Motorcycle extends Vehicle {
 Es posible usar getter y setters aquí.
 
 ### Prototypes
+Prototype es el mecanismo en Javascript que hace posible que tengamos objetos. Cuando nada está especificado en la creación de una clase, el objeto hereda de `Object.prototype prototype`, esta es una de las más complejas creaciones en Javascript que podemos usar. No hace falta ver como esta implementada, podemos considerarla como la base del objeto que está en la zona más alta por consiguiente siempre está presente.
+
+Hay una propiedad llamada `prototype` disponible en todas las clases, y siempre su nombre será "prototype". Podemos accederla así:
+```javascript
+ClassName.prototype
+```
+
+Veamos un ejemplo de como utilizarla, crearemos una clase:
+```javascript
+class Person {
+    constructor(firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    greet() {
+        console.log("Hi there!");
+    }
+}
+```
+
+Agreguemos una función a esta clase usando `prototype`:
+```javascript
+Person.prototype.introduce = function () {
+    console.log("Hi, I'm", this.firstname);
+};
+```
+
+`prototype` es una propiedad que almacena todas las propiedades y métodos de un objeto en Javascript. Entonces, agregando una función usando prototype es agregar una función a la clase. Puedes usar prototype para agregar propiedades y métodos a un objeto, así como hicimos en el ejemplo de abajo:
+```javascript
+Person.prototype.favoriteColor = "green";
+```
+
+Instanciamos para ver:
+```javascript
+let p = new Person("Maria", "Saga");
+console.log(p.favoriteColor); //muestra green
+p.introduce(); //muestra Hi, I'm Maria
+```
+Entonce, los métodos y propiedades definidos usando `prototype` son realmente igual a como los definidos usando class. Esto quiere decir que podemos sobreescribirlos para una cierta instancia y esto no sobreescribirá a otras. Por ejemplo, si teniamos una segunda persona, esta persona puede sobreescribir el `favoriteColor` y esto no afectará a nuestro primer objeto `Maria`.
+
+Esto es algo que no deberías usarlo si es que tienes el control sobre el código de una clase y si quiere hacer que el cambio sea permante, mejor haz el cambio en la clase.
+Sin embargo, puedes expandir objetos existentes tanto como sea necesario y bajo ciertas condiciones. Es también importante saber que los objetos preconstruidos de Javascript tienen prototypes y heredan de `Object.prototype`. Sin embargo, mejor asegurarse de no modificar este prototype desde el principio porque afectará en cómo Javascript funciona.
+
+#### Ejercicio 7.3
+Crear una clase que contenga las propiedades para diferentes especies de animales y que el sonido de cada especie corresponda, crear dos o más animales:
+1. Crear un método que imprima tal animal y su sonido.
+2. Agregar usando prototype con otra acción para el animal.
+3. Mostrar en consola un objeto animal.
+
+#### Proyecto: App de Seguimiento de empleado
+Crear una clase seguimiento de empleados de una compañía:
+1. Usar nombres y apellidos y el número de años trabajados como valores en el constructor.
+2. Crear dos o más personas con su valores y años trabajados. Agregar las personas en un Array.
+3. Crea un método usando `prototype` para retornar el detalle los nombres y apellidos y cuanto tiempo estuvieron trabajando en la compañía.
+4. Iterar el contenido del array para mostrar en la salida de consola, agregando algún texto para mostrar.
+
+#### Quiz 4
+1. ¿Cuál es la palabra clave para crear una clase?
+2. ¿Cómo definirías una clase para que las primeras letras de los nombres y apellidos sean realizados?
+3. ¿Cuál es el concepto de una cosa que gana propiedades y comportamiento de otra cosa?
+4. ¿Cuál de las siguientes son verdaderas acerca del método constructor?
+   - Se ejecuta automáticamente cuando se crea un objeto.
+   - Solamente debe ser agregado una vez.
+   - Debe incluir la palabra clase `constructor`.
+   - Es usado para inicializar propiedades de objetos.
+   - Puede ser utilizado cuando tiene múltiples valores.
+5. Soluciona el problema del siguiente código donde el prototype muestra la salida del primer y ultimo nombre de Person en la consola. ¿Cuál es la correcta sintaxis para el prototype de Person?
+```javascript
+function Person(first,last) {
+    this.first = first;
+    this.last = last;
+}
+// ¿Cuál debe ser?: A, B, or C?
+const friend1 = new Person("Laurence", "Svekis");
+console.log(friend1.getName());
+
+// A)
+Person.prototype.getName = (first,last) {
+    return this.first + " " + this.last;
+};
+
+// B)
+Person.prototype.getName = function getName() {
+    return this.first + " " + this.last;
+};
+
+// C)
+Person.prototype = function getName() {
+    return this.first + " " + this.last;
+};
+
+```
