@@ -3434,7 +3434,145 @@ Ahora mismo, `firstname` y `lastname` no pueden ser accedidos desde afuera de la
 let p = new Person("Maria", "Saga");
 console.log(p.firstname); //muestra undefined
 ```
+Si queremos estar seguros que solamente creamos objetos con los nombres que empiecen con "M", podemos modificar un poco el constructor:
+```javascript
+constructor(firstname, lastname) {
+    if(firstname.startsWith("M")){
+        this.#firstname = firstname;
+    } else {
+        this.#firstname = "M" + firstname;
+    }
+    this.#lastname = lastname;
+}
+```
+Probemos:
+```javascript
+let p = new Person("kay", "Moon");
+```
 
+#### Getter y Setters
+Los Getters y Setters son propiedades especiales que pueden ser usadas para obtener datos de una clase y setear campos de la misma. Getter y Setter son propiedades computadas. Eso significa que son más como propiedades que como funciones. Les llamamos accesores. Ellas lucen como un poco como funciones, porque tienen el `()`, pero no lo son.
+
+Los *accesores* empiezan con las palabras clave `get` y `set`. Son consideradas buena practica para hacer los atributos de clase privados lo máximo que se pueda y que solamente sean accesibles con los getters y setters. Este principio se llama **encapsulación**. La clase encapsula datos, y el objeto está en control de sus propios campos.
+
+Se realiza de la siguiente manera:
+```javascript
+class Person {
+    #firstname;
+    #lastname;
+    constructor(firstname, lastname) {
+        this.#firstname = firstname;
+        this.#lastname = lastname;
+    }
+    get firstname() {
+        return this.#firstname;
+    }
+    set firstname(firstname) {
+        this.#firstname = firstname;
+    }
+    get lastname() {
+        return this.#lastname;
+    }
+    set lastname(lastname) {
+        this.#lastname = lastname;
+    }
+}
+```
+
+El getter se usa para obtener el valor de una propiedad. Por lo tanto, no toma ningún parámetro, pero retorna la prpiedad. El setter es otra forma de: tomar un parámetro, asignar el nuevo valor a la propiedad, por ejemplo, una validación. El setter puede contener más lógica. El getter puede ser usado desde afuera del objeto como si fuese una propiedad. Las propiedades no están directamente accesible desde afuera de la clase, pero pueden ser accedidas vía getter para obtener el valor y vía setter para actualizar el valor. Ejemplo:
+```javascript
+let p = new Person("Maria", "Saga");
+console.log(p.firstname); //muestra Maria
+```
+
+Hemos creado un nuevo objeto Person con un el `firstname` `Maria` y un `lastname` `Saga`. La salida muestra el primer nombre, el cual es posible porque tenemos un accesor getter. También podemos setear un valor para alguna cosa. Actualicemos `Maria` a `Adnane`:
+```javascript
+p.firstname = "Adnane";
+```
+
+Hasta este punto no está pasando nada especial. Podemos hacer una validación similar a la que hicimos en el constructor pero en el setter:
+````javascript
+set firstname(firstname) {
+    if(firstname.startsWith("M")){
+        this.#firstname = firstname;
+    } else {
+        this.#firstname = "M" + firstname;
+    }
+}
+````
+
+Estp revisará si la primera letra de `firstname` empieza con mayúsculas, si lo es, actualiza el valor, sino, concatena una `M` enfrente del parámetro.
+
+Nota que no accedemos a firstname como si fuese una función. Si pegas los paréntesis `()` antes, obtendrás un error que te dirá que esto no es una función.
 
 ### Herencia(Inheritance)
+La herencia es uno de los conceptos claves de la POO. Este concepto dice que *existen clases que pueden tener clases hijas* que puedan heredar las propiedades y métodos de su clase padre. Por ejemplo, si necesitas un montón de objetos de vehículo en tu aplicación, puedes especificar una clase llamada `Vehicle`, el cual especifica que compartirá algunas propiedades y métodos. Luego podrías seguir adelante y crear clases hijas basadas en `Vehicle`, por ejemplo, `bote, auto, bicicleta, motocicleta`.
+
+Ejemplo:
+```javascript
+class Vehicle {
+    constructor(color, currentSpeed, maxSpeed) {
+        this.color = color;
+        this.currentSpeed = currentSpeed;
+        this.maxSpeed = maxSpeed;
+        }
+    move() {
+        console.log("moving at", this.currentSpeed);
+    }
+    accelerate(amount) {
+        this.currentSpeed += amount;
+    }
+}
+```
+
+Tenemos dos métodos en nuestro `Vehicle`, `move` y `accelerate`. Esto puede ser una clase `Motorcycle` con una herencia usando la palabra `extends`:
+```javascript
+class Motorcycle extends Vehicle {
+    constructor(color, currentSpeed, maxSpeed, fuel) {
+        super(color, currentSpeed, maxSpeed);
+        this.fuel = fuel;
+    }
+    doWheelie() {
+        console.log("Driving on one wheel!");
+    }
+}
+```
+Con `extends` estamos especificando que cierta clase es hija de otra clase. En este caso, `Motorcycle` es una clase hija de `Vehicle`. Esto significa que tendremos acceso a las propiedades y métodos de `Vehicle` en nuestra clase `Motorcycle`. Hemos agregado un método especial `doWheelie()` o andar en una rueda, es una acción que solamente tiene sentido en las motocicletas y no en autos.
+
+La palabra `super` en el constructor llama al constructor padre(`Vehicle`). Esto asegura que esos campos del padre son seteados y que todos los métodos estén disponibles para hacer cualquier cosa. Llama a `super()` no es opcional, *debes hacerlo* si estás usando la herencia desde otra clase, sino obtendrás un `ReferenceError`.
+
+Gracias a que accedemos a los campos de `Vehicle` en `Motorcycle`, esto funcionará.
+```javascript
+let motor = new Motorcycle("Black", 0, 250, "gasoline");
+console.log(motor.color); //muestra Black
+motor.accelerate(50);
+motor.move(); //muestra moving at 50
+```
+
+No podemos acceder a ninguna propiedad o método específica de `Motorcycle` en nuestra clase `Vehicle`.
+Esto es porque no todos los vehículos son motocicletas, entonces no podemos asegurar que tendremos todas las propiedades o métodos de un hijo.
+
+Otro ejemplo usando características del padre:
+```javascript
+class Motorcycle extends Vehicle {
+    constructor(color, currentSpeed, maxSpeed, fuel) {
+        super(color, currentSpeed, maxSpeed);
+        this.fuel = fuel;
+    }
+    doWheelie() {
+        console.log("Driving on one wheel!");
+    }
+    cambiarColor() {
+        // accediendo a la propiedad del padre
+        this.color = "rojo"
+    }
+    ejecutarMetodoDelPadre() {
+        // accediendo al metodo del padre
+        super.move();
+    }
+}
+```
+
+Es posible usar getter y setters aquí.
+
 ### Prototypes
