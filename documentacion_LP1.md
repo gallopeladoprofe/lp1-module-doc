@@ -1,4 +1,11 @@
-# Borrador LP1
+# Lenguaje de Programación I
+## Profesor: Lic. Juan José González Ramírez
+### Email: juanftp100.edu@gmail.com
+### Github: 
+- [Repositorio del profe - docencia](https://github.com/gallopeladoprofe)
+- [Repositorio del profe - personal](https://github.com/gallopelado)
+
+Aviso: Este documento está en constante actualización, favor dirigirse al email en caso de encontrar errores. Muchas gracias :sunglasses: :stuck_out_tongue_closed_eyes: :heartbeat:
 
 ## Capítulo 1 - Javascript
 Javascript es un lenguaje de programación que puede ser utilizado tanto en el cliente como en el servidor para aplicaciones. Del lado del servidor está la lógica del *backend* que usualmente corren en computadoras de algún datacenter e interactúa con la base de datos, mientras que el lado del cliente es cuando se está usando algún dispositivo del usuario, a menudo el navegador.
