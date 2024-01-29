@@ -3282,6 +3282,90 @@ let addTwoNumbers = (x, y) => {
 }
 ```
 
+#### Scope o contexto en funciones
+##### Variables locales en funciones
+Las variables locales son las que están en el contexto dentro de la función donde se crearon. Esto es verdad para las variables usando `let` y `var`. Hay una difenrencia entre ellas, el cual vamos a tocar también. Los parámetros de función(ellas no usan `let` o `var`) son también locales. Esto suena confuso, pero el siguiente código demostrará lo que quiero decir:
+```javascript
+function testAvailability(x) {
+    console.log("Available here:", x);
+}
+testAvailability("Hi!"); //muestra Available here: Hi!
+console.log("Not available here:", x); //lanza un error ReferenceError: x is not defined
+```
+Cuando llamamos dentro de una función, `x` se mostrará. La sentencia fuera de la función falla, porque `x` es una variable local de la función `testAvailability()`. Esto muestra que los parámetros de la función **no son accesibles** desde fuera de ella.
+Ellas están fuera del scope o contexto de la función. Veamos otro ejemplo:
+```javascript
+function testAvailability() {
+    let y = "Local variable!";
+    console.log("Available here:", y);
+}
+testAvailability(); //muestra Available here: Local variable!
+console.log("Not available here:", y); //lanza un error ReferenceError: y is not defined
+```
+Variables definidas dentro de la función no están disponibles fuera de la función también.
+
+Para los novatos, puede ser confuso combinar variables locales con `return`. Veamos:
+```javascript
+function testAvailability() {
+    let y = "I'll return";
+    console.log("Available here:", y);
+    return y;
+}
+let z = testAvailability(); //muestra Available here: I'll return
+console.log("Outside the function:", z); //muestra Outside the function: I'll return
+console.log("Not available here:", y); //retorna error ReferenceError: y is not defined
+```
+
+#### let versus var variables
+La diferencia entre `let` y `var` es que `var` es algo llamado *function-scoped* el cual describiremos abajo. `let` no es de ese tipo, porque es *block-scoped*. Un bloque es definido por dos llaves `{ }`. El código dentro de estas llaves es donde `let` está disponible.
+
+Veamos la diferencia en acción:
+```javascript
+function doingStuff() {
+    if (true) {
+        var x = "local";
+    }
+    console.log(x);
+}
+doingStuff(); //muestra local
+```
+Si usamos `var`, la variable se convierte en *function-scoped* y está disponible para cualquiera en el bloque de la función(incluso si se definió antes con el valor undefined). En consecuencia, despues de que el bloque `if` haya cerrado,`x` continua estando accesible.
+
+Veamos que pasa si en el mismo ejemplo usamos `let`:
+```javascript
+function doingStuff() {
+    if (true) {
+        let x = "local";
+    }
+    console.log(x);
+}
+doingStuff(); //lanza un error ReferenceError: x is not defined
+```
+Estamos obteniendo el error que `x` no está definida. Desde que `let` es exclusivamente *block-scoped*, `x` se sale del scope cuando termina el bloque `if`, lo que la hace inaccesible.
+
+Una diferencia final entre `let` y `var` está relacionado con el orden de declaración en un script.
+Prueba usando el valor de `x` antes de tener definido con `let`:
+```javascript
+function doingStuff() {
+    if (true) {
+        console.log(x);
+        let x = "local";
+    }
+}
+doingStuff();
+```
+Esto va darnos un **ReferenceError** porque `x` no está inicialziado. Esto es porque las variables declaradas con `let` no pueden ser accedidas antes de estar definidas, incluso dentro del mismo bloque. ¿Qué piensas que pasará del siguiente bloque de código?
+```javascript
+function doingStuff() {
+    if (true) {
+        console.log(x);
+        var x = "local";
+    }
+}
+doingStuff();
+```
+Ahora no mostrará ningún error. Cuando usamos una variable `var` antes de ser definida, solamente obtendremos undefined. Esto es debido a un fenómeno llamado *hoisting*, el cual significa que usando una variable `var` antes de ser declarada resulta en la variable siendo undefined en vez de darnos un **ReferenceError**.
+
 ### Capítulo 7 - Clases
 Ya vimos lo que son los objetos, las clases son planos o plantillas para la creación de un objeto.
 Las clases nos adentran a la programación orientada a objetos, el cual es el más importante avance de diseño en el desarrollo de software. Este desarrollo redujo la complejidad de las aplicaciones e incrementa la mantenibilidad un montón.
