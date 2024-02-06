@@ -3817,3 +3817,168 @@ Person.prototype = function getName() {
 };
 
 ```
+
+## Capitulo 9 - The Document Object Model
+El **Document Object Model (DOM)** o el modelo de documento de objeto. En este capítulo, vamos a introducirnos al DOM. Esto es un concepto fundamental que necesitas entender antes de trabajar con páginas web en Javascript. Este toma una página HTML y lo transforma en un árbol lógico. Si no sabes nada de HTML, no te preocupes. Vamos a realizar una sección corta de él.
+
+Una vez que estemos seguros que sabemos algo de HTML, podemos introducirnos a algo llamado **Browser Object Model (BOM)**. El BOM tiene todos los métodos y propiedades para que Javascript pueda interactuar con el navegador. Esta relacionado con las páginas visitadas, el tamaño de la ventana del navegador y también el DOM.
+
+El DOM contiene los elementos HTML de una página web. Con Javascript, podemos seleccionar y manipular partes del DOM. Esto lleva a interactuar con páginas webs en vez de hacerlas estáticas.
+
+¡Podremos crear páginas webs interactivas!
+
+En este capítulo vamos a ver los siguientes temas:
+- Curso relámpago de HTML
+- Introducción al BOM
+- Introducción al DOM
+- Tipos de elementos del DOM
+- Seleccionar elementos de una página
+
+### Curso relámpago de HTML
+
+### Introducción al BOM
+HTML significa **Hyper-Text Markup Language** o lenguaje de marcado de hipertexto, es un lenguaje que dibuja el contenido de las páginas web. Los navegadores web entienden HTML y lo representan en un formato que veremos:
+
+Puedes probar esto en tu vscode:
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tab in the browser</title>
+    </head>
+<body>
+    p>Hello web!</p>
+</body>
+</html>
+```
+
+HTML consiste en elementos. Estos elementos contienen etiquetas o *tags* y atributos.
+
+#### Elementos HTML
+Como puedes ver, HTML consiste en palabras mediante `<este símbolo de mayor/menor>`.
+Cualquier elemento que es abierto debe ser cerrado. Si abrimos con `<elemento>`, cerramos con `</elemento>`.
+
+Todo lo que está en medio es parte del elemento. Hay algunas excepciones acerca de esto en cuanto al cierre. Si vemos lo siguiente, el elemento `<p>` está dentro del elemento `<body>`:
+```html
+<body>
+    <p>Hello web!</p>
+</body>
+```
+
+Entonces, los elementos pueden contener otros elementos. Los elementos pueden únicamente ser cerrados si los otros elementos internos también han sido cerrados. Ejemplo:
+```html
+<externo>
+    <sub>
+        <interno>
+        </interno>
+    </sub>
+</externo>
+```
+Y la mala manera:
+```html
+<externo>
+    <sub>
+        <interno>
+    </sub>
+        </interno>
+</externo>
+```
+Nota que, estos elementos ya están creados con sus nombres en específico. En el último ejemplo, cerramos el `sub` antes que el `<interno>`. Esta forma es incorrecta; debes siempre cerra cada elemento con sus respectivos elementos. Podemos llamar a los elementos internos *elementos hijos* y a los elementos externos *elementos padres*. La forma correcta del HTML:
+```html
+<body>
+    <div>
+        <p>
+        </p>
+    </div>
+</body>
+```
+La mala forma:
+```html
+<body>
+    <div>
+        <p>
+    </div>
+        </p>
+</body>
+```
+Los diferentes elementos representan diferentes piezas de esta etapa. La etiqueta `p` representa párrafos. Otra muy común es `h1`, representa un título grande. Lo que es más importante saber es el árbol de elementos de cada página HTML. Los más improtantes: El elemento HTML, el head y el body.
+
+Dentro del elemento HTML, todos los THML tienen un lugar. Puedes solamente tener uno de estos en tu página HTML. Este es el elemento más externo, y todos los otros elementos son contenidos en el. Dentro tiene dos nieveles: `head` y `body`. Si te confundes en el orden de esto, puedes pensar que es como un humano, donde el head es la cabeza y el body para el cuerpo.
+
+En el elemento head, ordenamos un montón de cosas que son importantes para el navegador y no tanto para el usuario. Metadatos, cosas de Javascript, hojas de estilo CSS y datos que necesitan los motos de búsqueda como Google, Bing, como la descripción.
+
+Ejemplo:
+```html
+<head>
+    <title>This is the title of the browser tab</title>
+    <meta name="description" content="This is the preview in google">
+    <script src="included.js"></script>
+</head>
+```
+El elemento `body` es mayormente usado para el contenido que va aparecer en la página web. Solamente puede haber un elemento `body`. Títulos, párrafos, imágenes, listas, links, botones y mucho más puede ser incluido varias veces dentro del boyd. Por cierto, cada uno de ellos tiene su respectivo *tag* o etiqueta, las imágenes usan `img`, los links `a`. Vamos a ver una tabla donde está los comúnmente usados.
+
+| Tag de apertura | Tag de cierre | Descripción |
+|-----------------|---------------|-------------|
+| `<p>`           | `</p>`        | Usado para crear párrafos. |
+| `<h1>`           | `</h1>`        | Usado para crear títulos; los pequeños son desde `h2` hasta el `h6`. |
+| `<span>`           | `</span>`        | Usado para crear contenedores en una línea para contenidos que deben ser separados. |
+| `<a>`           | `</a>`        | Usado para crear hiperlinks. |
+| `<button>`           | `</button>`        | Usado para crear botones. |
+| `<table>`           | `</table>`        | Usado para crear tablas. |
+| `<tr>`           | `</tr>`        | Usado para crear una fila de la tabla, debe estar dentro de la tabla. |
+| `<td>`           | `</td>`        | Usado para crear datos dentro de las celdas de una fila de la tabla. |
+| `<ul>`           | `</ul>`        | Usado para crear listas no ordenadas, con puntos, por ejemplo. |
+| `<ol>`           | `</ol>`        | Usado para crear listas ordenadas, numeradas. |
+| `<li>`           | `</li>`        | Usado para crear ítems dentro de la lista(ordenada y no ordenada) |
+| `<div>`           | `</div>`        | Usado para crear secciones dentro de una página HTML. Es usado como un contenedor o cajas para otros estilos o secciones, pueden ser usados como un plano. |
+| `<form>`           | `</form>`        | Usado para crear formularios HTML. |
+| `<input>`           | `</input>`        | Usado para crear campos en el cual el usuario pueden introducir información. Estos pueden ser textbox, checkbox, buttons, password, number, dropdown, radio buttons, etc. |
+| `<input />`           | No        | Usado para crear campos, igual que el anterior pero sin etiqueta de cierre. |
+| `<br>`           | No       | Usado para crear una un enter o nueva línea. |
+
+¿Puedes averiguar qué hace esto?:
+```html
+<html>
+    <head>
+        <title>Awesome</title>
+    </head>
+    <body>
+        <h1>Language and awesomeness</h1>
+        <table>
+            <tr>
+                <th>Language</th>
+                <th>Awesomeness</th>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <td>HTML</td>
+                <td>100</td>
+            </tr>
+        </table>
+    </body>
+</html>
+```
+
+#### Atributos HTML
+Los atributos influencian el elemento. Ellos existen dentro del elemento, son especificadas o asignadas a un valor. Por ejemplo, el atributo de (que indica hiperlink) es el `href`. Esto especifica donde el link debe ser redirigido:
+```html
+<a href="https://google.com">Ask Google</a>
+```
+Esto muestra un link que dice *Ask Google*. Si haces click, será enviado a Google, esto es gracias al atributo. Aquí una lista corta de ellos:
+
+| Atributo | Descripción | Puede ser usado en qué elemento |
+|----------|-------------|---------------------------------|
+| `id` | Da un identificador único a un elemento, como por ejemplo, edad | Todos |
+| `name` | Usado para nombrar un nombre personalizado a un elemento | input, button, form y muchos otros. |
+| `class` | Es un metadata especial que puede ser agregado a un elemento. Resulta en una disposición o plano o para la manipulación de Javascript. | Todos |
+| `value` | Setea el valor inicial del elemento. | button, input, li y muchos otros. |
+| `style` | Da una disposición específica a un elemento HTML | Todos |
+
+
+### Introducción al DOM
+### Tipos de elementos del DOM
+### Seleccionar elementos de una página
