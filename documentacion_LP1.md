@@ -3978,6 +3978,48 @@ Esto muestra un link que dice *Ask Google*. Si haces click, será enviado a Goog
 | `value` | Setea el valor inicial del elemento. | button, input, li y muchos otros. |
 | `style` | Da una disposición específica a un elemento HTML | Todos |
 
+#### El BOM
+El BOM, algunas veces llamado el **window browser object**, es un elemento increíble y "mágico" que hace posible para ti que el código de Javascript se comunique con el navegador.
+El *window object* contiene todas las propiedades requeridas para representar la ventana del navegador, por ejemplo, el tamaño de la ventana y el historial previamente visitado de las páginas web. El window object tiene variables y funciones globales y estas pueden ser vistas cuando exploramos el window object. La implementación exata del BOM depende de cada navegador y de su versión. Esto es importante tener en mente mientras trabajamos en estas secciones.
+
+Algunos de los más importantes objetos del BOM que vamos a ver son:
+- History
+- Navigator
+- Location
+
+Más adelante vamos a considerar elementos del DOM a detalle. Pero primero, podemos explorar el BOM y mirar los objetos usando el comando `console.dir(window)`. Entraremos en la consola de nuestro navegador.
+
+Podemos acceder a los elementos HTML y a Javascript si vamos alpanel de inspeccionar elementos de nuestro navegador.
+
+![inspect_elements_tab](./img/inspect_elements.png)
+
+Luego tenemos a la pestaña **Console**, el que está al lado de **Elements** en la imagen de abajo.
+Puedes escribir el siguiente comando y presionar *Enter* para obtener información acerca del window object:
+
+```javascript
+console.dir(window);
+```
+![console_tab](./img/console.png)
+
+El `console.dir()` muestra una lista de todas las propiedades de un objeto en específico. Puedes desplegar más opciones en esos pequeños triángulos.
+
+El BOM contiene muchos otros objetos. Podemos acceder a ellos como si mirásemos un objetos, usando el punto, por ejemplo, podemos obtener la propiedad `length` del history (en nuestro navegador) accediendo al objeto `history` del window y luego el length del mismo. Veamos:
+
+```javascript
+window.history.length;
+```
+
+#### Window history object
+La ventana del navegador también contiene un objeto history. Este objeto de hecho puede ser escrito sin usar el prefijo `window` porque este es global, puedes hacer directamente `console.dir(history)`.
+
+Navega por varios sitios y luego experimenta con este comando y descubre que hace:
+```javascript
+history.go(-1);
+```
+#### Window navigator object
+En el window object que vimos, hay una propiedad llamada `navigator`. Esta propiedad es particularmente interesante porque contiene información acerca del navegador cuando lo estamos usando, cosas como qué navegador es, qué versión tiene, en qué sistema operativo está funcionando el navegador.(En construcción pág. 240)
+
+
 
 ### Introducción al DOM
 ### Tipos de elementos del DOM
