@@ -207,7 +207,7 @@ El selector universal es el asterisco (`*`), selecciona todos los elementos de l
 El selector de grupo selecciona todos los elementos HTML con la misma definición de estilo.
 Mira el siguiente bloque, h1, h2 y p tienen la misma definición:
 ```css
-1 {
+h1 {
   text-align: center;
   color: red;
 }
@@ -236,3 +236,13 @@ h1, h2, p {
 2. Asigna el color de texto rojo, para el elemento que tenga un id="para1".
 3. Asigna el color de texto rojo, para los elementos con `class="colortext"`.
 4. Asigna el color de texto rojo, para todos las etiquetas `<p>` y `<h1>`. Utiliza la agrupación para minimizar código.
+
+#### Todos los selectores simples
+| Selector | Ejemplo | Descripción |
+|----------|---------|-------------|
+| `#id` | #primernombre | Selecciona el elemento con el *id="primernombre"* |
+| `.class` | .intro | Selecciona todos los elementos con la clase *class="intro"* |
+| `elemento.class` | p.intro | Selecciona solamente `<p>` con la clase *class="intro"* |
+| `*` | * | Selecciona todos los elementos |
+| `elemento` | p | Selecciona todos los elementos `<p>` |
+| `elemento, elemento2,..` | div, p | Selecciona todos los `<div>` y todos los `<p>` |
