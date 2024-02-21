@@ -4131,3 +4131,117 @@ Este ejercicio demostrará como usar una función callback, creando una form de 
 3. Haz un split del string dentro array.
 4. Enviar el el array `nombrecompleto` a `saludo()`.
 5. Invocar el proceso del callback.
+
+### Promesas (Promises)
+Con **Promises**, podemos organizar la secuencia de nuestro código de forma ligera y fácil de mantener. Una promise es un objeto especial que conecta el código que necesitas para producir un resultado y que necesitas usar ese resultado en el siguiente paso.
+
+Cuando creamos una Promise, damos una función. En el siguiente ejemplo, vamos a usar una "convención", vamos a crear una función inmediatamente. Entonces, dentro de la lista de argumentos vamos a definir una función, a menudo se usa una función flecha o arrow function también. Esta función necesita dos parámetros llamados callbacks. Los llamaremos `resolve` y `reject` aquí.
+
+**PD: Puedes llamar a estos parámetros como quieras, pero los más comunes son `resolve` o `res` y `reject` o `rej`.**
+
+Cuando `resolve()` es llamado, la Promise es presumiblemente exitosa y retorna cualquier cosa entre las funciones flecha y se utiliza `then` como método de la promesa. Si es `reject()` llamada, la Promise falló y va al método `catch()` y si está presente se ejecutan con los argumentos de la misma.
+
+Esta es mucha información que puede ser difícil entender a la primera, por eso aquí hay un ejemplo de Promise para ayudarte:
+```javascript
+let promise = new Promise(function(resolve, reject) {
+    //Hacer algo que pueda tomar tiempo
+    //Setearemos x en este ejemplo
+    let x = 20;
+    if(x > 20) {
+        resolve(x); //exitoso
+    } else {
+        reject("Muy bajo");
+    }
+});
+
+//Resolver la promesa
+promise.then(
+    function (value) {
+        console.log("Exitoso: ", value);
+    },
+    function (error) {
+        console.log("Error: ", error);
+    }
+);
+```
+
+Primero creamos una Promise. Cuando creamos una Promise, no sabemos cuál es va ser el valor de la misma. Este valor es lo que sea que se haya enviado como un argumento para la función resolve.
+
+Cuando llamamos sobre la Promise, básicamente decimos: *averigua que valor de la promesa es, y si lo sabes, ejecuta una función si la promesa fue resuelta(resolved) o una función diferente si esta ha sido rechazada(rejected)*. Cuando una Promise nunca es resuelta o rechazada, decimos que esta *pending*.
+
+`then()` es una Promise en sí misma, cuando este retorna podemos usar el resultado para la siguiente instancia de `then()`. Esto quiere decir que podríamos "encadenar" los `then()`:
+```javascript
+const promise = new Promise((resolve, reject) => {
+    resolve("Exitoso!");
+})
+.then(value => {
+    console.log(value);
+    return "Nosotros";
+})
+.then(value => {
+    console.log(value);
+    return "podemos";
+})
+.then(value => {
+    console.log(value);
+    return "encadenar";
+})
+.then(value => {
+    console.log(value);
+    return "promises";
+})
+.then(value => {
+    console.log(value);
+})
+.catch(value => {
+    console.log(value);
+});
+```
+
+Esto debería mostrar:
+```javascript
+Exitoso!
+Nosotros
+podemos
+encadenar
+promises
+```
+La funciones `resolve()` son implementadas con arrow functions. El `return` es el valor de entrada para la siguiente función. Puedes ver que en el último bloque hay un `catch()`. Si alguna de las funciones fallasen y la Promise fuera rechazada, el bloque `catch()` sería ejecutado e imprime lo que sea que la función `reject()` haya enviado al `catch()`. Por ejemplo:
+```Javascript
+const promise = new Promise((resolve, reject) => {
+    reject("oops!");
+})
+.then(value => {
+    console.log(value);
+    return "Nosotros";
+})
+.then(value => {
+    console.log(value);
+    return "podemos";
+})
+.then(value => {
+    console.log(value);
+    return "encadenar";
+})
+.then(value => {
+    console.log(value);
+    return "promises";
+})
+.then(value => {
+    console.log(value);
+})
+.catch(value => {
+    console.log(value);
+});
+```
+#### Ejecicio 13.2
+En este ejercicio, vas a crear un contador que va imprimir los valores en secuencia usando Promises.
+1. Set una Promise que resuelva con los valores de `Start Counting`.
+2. Crear una función llamada `counter()` que tiene un argumento que obtiene el valor y muestra en consola.
+3. Inicia la siguiente función en el Promise con cuatro instancias de `then()`, el cual debería mostrar un valor en la función counter, y retorna un valor el cual proveerá una entrada para el subsiguiente `then()`. Los valores retornados deberían ser `uno, dos, tres`. Se mostraría así:
+```javascript
+Start Counting
+Uno
+Dos
+Tres
+```
