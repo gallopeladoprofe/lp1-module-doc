@@ -4022,5 +4022,112 @@ En el window object que vimos, hay una propiedad llamada `navigator`. Esta propi
 
 
 ### Introducción al DOM
+(En construcción)
 ### Tipos de elementos del DOM
+(En construcción)
 ### Seleccionar elementos de una página
+(En construcción)
+
+## Capítulo 13 Concurrencia
+Es tiempo de temas más avanzados. Vamos a tratar el tema del código asíncrono y algunas opciones para la multitarea. Este concepto es llamado *concurrencia*. No te preocupes si este capítulo es un poco difícil; esto es programación en Javascript de alto nivel. Los temas que abordaremos son:
+- Concurrencia (Concurrency)
+- Callbacks
+- Promesas (Promises)
+- `async/await`
+- Event loop
+Si, esto es difícil, pero entender como sacar ventaja de la concurrencia puede realmente mejorar el rendimiento de tus programas acelerando procesos, el cual es una razón suficiente para entrar en este avanzado tema.
+
+### Entrando en la concurrencia
+**Concurrency** es cuando cosas están ocurriendo "al mismo tiempo" o en *paralelo*. Para darte un ejemplo, hablemos acerco de como gestionar mi hogar. Cuando llego a casa un sábado por la noche, tengo una serie de tareas: los niños necesitan comer, bañarlos y llevarlos a la cama, la ropa sucia necesita ordenada y ponerla en el lavarropas, y para ser justos, un montón de cosas más, pero esto es suficiente para ilustrar el ejemplo.
+
+Si pudiera ser capa de hacer esto sin la capacidad de hacer múltiples cosas a la vez, esta sería una noche muy difícil y terminaría tarde. Haría primero la cena -poner la pizza en el horno y esperar lo siguiente -alimentar a los niños, bañarlos después, llevarlos a la cama y luego doblar la ropa, después poner a funcionar el lavarropas otra vez, y esperar hasta que termine. Por suerte, soy multitarea, entonces se vería algo como esto: Pongo la pizza en el horno, mientras tanto, enciendo el lavarropas y doblo las ropas para el lavado, luego alimento a los niños, hago el resto del lavado mientras ellos toman un baño, y termino rapidísimo.
+
+Esto es lo mismo para tu computadora y las aplicaciones que usas. Si no era posible hacer múltiples cosas al mismo tiempo, tú probablemente estarías molesto. No serías capaz de revisar tu email mientras estas escribiendo código, no podrías ser capaz de escuchar música mientras escribes código y muchas cosas más. Esta es tu computadora intercambiando entre diferentes tareas. Lo de "que ocurra al mismo tiempo" pasa al nivel de aplicación. Por ejemplo, podemos llamar a alguna API y no esperar su respuesta pero hacer otra cosa más útil mientras tanto. Podemos hacerlo usando el concepto de concurrencia.
+
+Hay tres estategias en Javascript que tu necesitarás saber cuando trabajas con concurrencia: **callbacks, Promises**, y **async/await**.
+
+### Callbacks
+**Callbacks** son la primera cosa que deberíamos entender cuando hablamos de concurrencia. Las buenas nuevas es que el principio del *callback* no es muy difícil de entender. Es solo una función que toma otra función como un argumento, que luego es llamado cuanto el resto de la función inicial finalizó. En otras palabras, es sola una función llamando a otra función, ejemplo:
+```javascript
+function hacerAlgo(callback) {
+    callback();
+}
+function decirHola() {
+    console.log("Hola");
+}
+hacerAlgo(decirHola);
+```
+La función `hacerAlgo()` es creada con el parámetro `callback`, es solamente traer cualquier función que está siendo pasada como un argumento. Podemos llamarla usando la función `decirHola` con un argumento, aparentemente este trozo de código es una manera complicad de decir hola e imprimirlo en consola.
+
+Un ejemplo:
+```javascript
+function jurado(grado) {
+    switch(true) {
+        case grado == "A":
+            console.log("Obtuviste una ", grado, ": ¡Increíble!");
+            break;
+        case grado == "B":
+            console.log("Obtuviste una ", grado, ": bien hecho");
+            break;
+        case grado == "C":
+            console.log("Obtuviste una ", grado, ": bien");
+            break;
+        case grado == "D":
+            console.log("Obtuviste una ", grado, ": hmm...");
+            break;
+        default:
+            console.log("Un ", grado, " ¿Qué?!");
+    }
+}
+function obtenerGrado(puntos, callback) {
+    let grado;
+    switch(true) {
+        case puntos >= 90:
+            grado = "A";
+            break;
+        case puntos >= 80:
+            console.log(puntos);
+            grado = "B";
+            break;
+        case puntos >= 70:
+            grado = "C";
+            break;
+        case puntos >= 60:
+            grado = "D";
+            break;
+        default:
+            grado = "F";
+    }
+    callback(grado);
+}
+
+obtenerGrado(85, jurado);
+```
+Hay dos funciones aquí: `jurado()` y `obtenerGrado()`. Llamamos la función `obtenerGrado()` con dos argumentos: `85` y la función `jurado()`. Nota que cuando es llamada una función como un argumento, no incluimos el paréntesis. El `jurado()` es almacenado en un `callback`. Después de determinar el grado, la función que es almacenada en un callback (`jurado()` en este caso) es llamada con el grado.
+
+Esto puede ser otra función que haga cosas más útiles que juzgar, por ejemplo, enviar un email basado en los resultados del test. Si queremos eso, no necesitaríamos cambiar `obtenerGrado()`; solamente necesitamos escribir una nueva función que haga esto y llamar a `obtenerGrado()` con la nueva función como un segundo argumento.
+
+De seguro estás desilusionado, porque esto no es muy emocionante. Los Callbacks se convierten en algo de mucho valor en un contexto asíncrono, por ejemplo, cuando una función sigue esperando por los resultados de una llamada para leer la base de datos antes que el callback vaya a procesar los datos.
+
+Algunas funciones preconstruidas de Javascript trabajan con el principio del callback, por ejemplo, el `setTimeOut()` y el `setInterval()`. Ellas toman una función que es ejecutada luego de un cierto tiempo en el caso de un timeout y cada cierta cantidad de tiempo por un intervalo especificado. Ejemplo:
+```javascript
+setInterval(motivar, 500);
+
+function motivar() {
+    console.log("Lo estas haciendo bien, sigue así!");
+}
+```
+Las funciones que son insertadas como argumentos son llamadas callbacks aquí.
+Entender la concurrencia inicia realmente con los callbacks, pero múltiples y anidados callbacks hacen difícil leer código.
+
+Cuando todo esto es escrito en una función con una función anónima dentro, se ve mucha sangría también. Eso es llamado **callback hell** o el **Christmas tree problem** (porque el código se vuelve muy anidado y parece un árbol de navidad).
+
+Los Callbacks son un gran concepto, pero crean código poco legible muy rápido. A menudo hay mejores soluciones, promesa.
+
+#### Ejercicio 13.1
+Este ejercicio demostrará como usar una función callback, creando una form de pasar valor de una función a otra invocando un callback. Vamos a crear un callback de saludo usando un nombre completo en un string.
+1. Crear una función `saludo()` que tome un argumento, `nombrecompleto`. Ese argumento debería ser un array. Muestra los items del array en consola interpolando dentro un mensaje de saludo.
+2. Crear una segunda función que tenga dos argumentos: el primero es un string de nombre completo de usuario y el segundo es un callback.
+3. Haz un split del string dentro array.
+4. Enviar el el array `nombrecompleto` a `saludo()`.
+5. Invocar el proceso del callback.
