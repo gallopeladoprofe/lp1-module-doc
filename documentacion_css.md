@@ -246,3 +246,229 @@ h1, h2, p {
 | `*` | * | Selecciona todos los elementos |
 | `elemento` | p | Selecciona todos los elementos `<p>` |
 | `elemento, elemento2,..` | div, p | Selecciona todos los `<div>` y todos los `<p>` |
+
+### Como agregar CSS
+Cuando un navegador lee una hoja de estilo, este va a formatear el documento HTML de acuerdo con la información en la hoja de estilos.
+
+#### Hay tres formas de usar CSS
+- CSS externo
+- CSS interno
+- CSS en línea
+
+#### CSS externo
+Con una hoja de estilos externa, puedes cambiar la apariencia completa de un website en un solo archivo.
+Cada página HTML debe incluir una referencia a la hoja de estilos usando la etiqueta `<link>` en el head.
+
+Ejemplo:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="mystyle.css">
+  </head>
+  <body>
+
+    <h1>Esto es un título grande</h1>
+    <p>Un párrafo.</p>
+
+  </body>
+</html>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_howto_external)
+
+Una hoja de estilos externa puede ser escrita con cualquier editor de texto, debe ser guardada con la extensión **.css**.
+El fichero **.css** no debería contener ninguna etiqueta HTML.
+
+Ejemplo:
+```css
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: navy;
+  margin-left: 20px;
+}
+```
+---
+**Atención:** No agregar espacios en medio de la propiedad (20) y la unidad (px):
+Incorrecto(espacio): `margin-left: 20 px;`
+Correcto(espacio): `margin-left: 20px;`
+---
+
+#### CSS interno
+También puede usarse CSS en un documento HTML.
+El css interno se define dentro de la etiqueta `<style></style>` del head.
+
+Ejemplo:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    body {
+      background-color: linen;
+    }
+
+    h1 {
+      color: maroon;
+      margin-left: 40px;
+    }
+  </style>
+  </head>
+  <body>
+
+	<h1>This is a heading</h1>
+	<p>This is a paragraph.</p>
+
+  </body>
+</html>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_howto_internal)
+
+
+#### CSS en línea
+El estilo *inline* podría ser aplicado a un elemento.
+Para usar el estilo inline, se debe agregar el atributo `style` a un elemento. Este atributo puede contener propiedades CSS.
+
+Ejemplo:
+```html
+<!DOCTYPE html>
+<html>
+	<body>
+
+		<h1 style="color:blue;text-align:center;">This is a heading</h1>
+		<p style="color:red;">This is a paragraph.</p>
+
+	</body>
+</html>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_howto_inline)
+
+#### Hojas de estilo múltiple
+Si algunas propiedades fueron definidas para el mismo selector (elemento) en diferentes hojas de estilo, el valor de la última hoja de estilo leída será usado.
+
+Asumimos que una **hoja de estilos externa** está siendo aplicada al elemento `<h1>`:
+```css
+h1 {
+  color: navy;
+}
+```
+
+Luego, asumimos que hay **estilos internos** que también modifican al elemento `<h1>`:
+```css
+h1 {
+  color: orange;
+}
+```
+
+Si el estilo interno es definido **después** de un link externo, el <h1> será orange:
+```html
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+	h1 {
+	color: orange;
+	}
+</style>
+</head>
+```
+#### Orden en cascada
+¿Cuál será el estilo a usarse cuando hay más de uno en el documento HTML?
+
+Todoslos estilos en una página será interpretados en un nuevo estilo virtual de reglas, donde el número uno tiene la mayor prioridad de todas:
+1. Estilo en línea(inline dentro del elemento HTML)
+2. Hojas de estilos interna y externa (en la sección del head)
+3. Por defecto del navegador
+
+Entonces, un estilo inline tiene la mayor prioridad, y va a sobreescribir estilos internos y externos como también lo que el navegador maneja por defecto.
+
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_howto_cascade)
+
+Ejercicio:
+Agregar un estilo externo con la URL: "mystyle.css".
+```html
+<head>
+
+</head>
+
+<body>
+  <h1>This is a heading</h1>
+  <p>This is a paragraph</p>
+  <p>This is a paragraph</p>
+</body>
+```
+
+### Comentarios en CSS
+Los comentarios en CSS no son mostrados en el navegador, pero ellos pueden ayudar a documentar el código fuente.
+
+Los comentarios son usados para explicar código, también para editar.
+
+Los comentarios son ignorados por el navegador.
+
+Un comentario puede ser escrito dentro de las etiquetas `<style>`, empieza con `/*` y termina con `*/`:
+
+Ejemplo:
+```css
+/* This is a single-line comment */
+p {
+  color: red;
+}
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments)
+
+Puedes agregar comentarios donde quieras en el código:
+```css
+p {
+  color: red;  /* Set text color to red */
+}
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments2)
+
+Incluso en medio del código:
+```css
+p {
+  color: /*red*/blue; 
+}
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments2_2)
+
+También pueden ocupar múltiples líneas:
+```css
+/* This is
+a multi-line
+comment */
+
+p {
+  color: red;
+}
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments3)
+
+#### Comentarios CSS y HTML
+Ya sabes que en HTML, los comentarios son `<!--...-->`.
+
+En el ejemplo de HTML:
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+	<style>
+		p {
+			color: red; /* Set text color to red */
+		}
+	</style>
+	</head>
+	<body>
+
+		<h2>My Heading</h2>
+
+		<!-- These paragraphs will be red -->
+		<p>Hello World!</p>
+		<p>This paragraph is styled with CSS.</p>
+		<p>CSS comments are not shown in the output.</p>
+
+	</body>
+</html>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments4)
