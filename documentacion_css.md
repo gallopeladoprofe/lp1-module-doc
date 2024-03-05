@@ -472,3 +472,367 @@ En el ejemplo de HTML:
 </html>
 ```
 [¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_comments4)
+
+### Colores en CSS
+Los colores son especificados usando nombres de colores, o RGB, HEX, HSL, RGBA, HSLA.
+
+Por nombres de colores:
+```html
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h1 style="background-color:Tomato;">Tomato</h1>
+  <h1 style="background-color:Orange;">Orange</h1>
+  <h1 style="background-color:DodgerBlue;">DodgerBlue</h1>
+  <h1 style="background-color:MediumSeaGreen;">MediumSeaGreen</h1>
+  <h1 style="background-color:Gray;">Gray</h1>
+  <h1 style="background-color:SlateBlue;">SlateBlue</h1>
+  <h1 style="background-color:Violet;">Violet</h1>
+  <h1 style="background-color:LightGray;">LightGray</h1>
+
+</body>
+</html>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_color_names)
+CSS y HTML son compatibles con [140 nombres de colores](https://www.w3schools.com/colors/colors_names.asp)
+
+#### El Background color
+Puedes configurar el background color o fondo de los elementos HTML:
+<h1 style="background-color:DodgerBlue;">Hello World</h1>
+<p style="background-color:Tomato;">Lorem ipsum...</p>
+
+Ejemplo:
+```html
+<h1 style="background-color:DodgerBlue;">Hello World</h1>
+<p style="background-color:Tomato;">Lorem ipsum...</p>
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_color_background)
+
+#### El color del texto
+Puedes configurar el color del texto:
+<h4 style="color:Tomato;">Hola Mundo</h4>
+<p style="color:DodgerBlue;">Lorem ipsum...</p>
+<p style="color:MediumSeaGreen;">Ut wisi enim...</p>
+
+Ejemplo:
+```html
+<h1 style="color:Tomato;">Hello World</h1>
+<p style="color:DodgerBlue;">Lorem ipsum...</p>
+<p style="color:MediumSeaGreen;">Ut wisi enim...</p>
+```
+
+#### El color de borde o border color
+Puedes cambiar el color de los bordes:
+<h1 style="border:2px solid Tomato;">Hello World</h1>
+<h1 style="border:2px solid DodgerBlue;">Hello World</h1>
+<h1 style="border:2px solid Violet;">Hello World</h1>
+
+Ejemplo:
+```html
+<h1 style="border:2px solid Tomato;">Hello World</h1>
+<h1 style="border:2px solid DodgerBlue;">Hello World</h1>
+<h1 style="border:2px solid Violet;">Hello World</h1>
+```
+
+#### Los tipos de valores de colores
+CSS permite especificar diferentes tipos de valores como pueden ser: RGB, HEX, RGBA, HSLA:
+
+Usaremos el color "Tomato":
+<h1 style="background-color:rgb(255, 99, 71);">rgb(255, 99, 71)</h1>
+<h1 style="background-color:#ff6347;">#ff6347</h1>
+<h1 style="background-color:hsl(9, 100%, 64%);">hsl(9, 100%, 64%)</h1>
+
+Ejemplo:
+```html
+<h1 style="background-color:rgb(255, 99, 71);">rgb(255, 99, 71)</h1>
+<h1 style="background-color:#ff6347;">#ff6347</h1>
+<h1 style="background-color:hsl(9, 100%, 64%);">hsl(9, 100%, 64%)</h1>
+```
+
+El mismo color pero con un 50% de transparencia:
+<h1 style="background-color:rgba(255, 99, 71, 0.5);">rgba(255, 99, 71, 0.5)</h1>
+<h1 style="background-color:hsla(9, 100%, 64%, 0.5);">hsla(9, 100%, 64%, 0.5)</h1>
+
+Ejemplo:
+```html
+<h1 style="background-color:rgba(255, 99, 71, 0.5);">rgba(255, 99, 71, 0.5)</h1>
+<h1 style="background-color:hsla(9, 100%, 64%, 0.5);">hsla(9, 100%, 64%, 0.5)</h1>
+```
+
+#### Colores RGB
+Un color en RGB representa RED, GREEN, BLUE
+
+Siguiendo esta fórmula:
+
+**rgb(red, green, blue)**
+
+Cada parámetro (red, gree, blue) define la intensidad del color entre 0 y 255.
+
+Por ejemplo, rgb(255, 0, 0) muestra el rojo(red), porque red es el más alto valor y los otros tienen 0.
+
+Para mostrar negro(black), se utiliza todos los parámetros a 0, rgb(0, 0, 0).
+
+Para mostrar blanco(white), se utiliza todos los parámetros a 255, rgb(255, 255, 255).
+
+[¡Prueba en línea!](https://www.w3schools.com/css/css_colors_rgb.asp)
+
+<h2 style="background-color:rgb(255, 0, 0);">rgb(255, 0, 0)</h2>
+<h2 style="background-color:rgb(0, 0, 255);">rgb(0, 0, 255)</h2>
+<h2 style="background-color:rgb(60, 179, 113);">rgb(60, 179, 113)</h2>
+<h2 style="background-color:rgb(238, 130, 238);">rgb(238, 130, 238)</h2>
+<h2 style="background-color:rgb(255, 165, 0);">rgb(255, 165, 0)</h2>
+<h2 style="background-color:rgb(106, 90, 205);">rgb(106, 90, 205)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:rgb(255, 0, 0);">rgb(255, 0, 0)</h2>
+<h2 style="background-color:rgb(0, 0, 255);">rgb(0, 0, 255)</h2>
+<h2 style="background-color:rgb(60, 179, 113);">rgb(60, 179, 113)</h2>
+<h2 style="background-color:rgb(238, 130, 238);">rgb(238, 130, 238)</h2>
+<h2 style="background-color:rgb(255, 165, 0);">rgb(255, 165, 0)</h2>
+<h2 style="background-color:rgb(106, 90, 205);">rgb(106, 90, 205)</h2>
+```
+
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_color_rgb2)
+
+La escala de grises también es usada:
+<h2 style="background-color:rgb(60, 60, 60);">rgb(60, 60, 60)</h2>
+<h2 style="background-color:rgb(90, 90, 90);">rgb(90, 90, 90)</h2>
+<h2 style="background-color:rgb(120, 120, 120);">rgb(120, 120, 120)</h2>
+<h2 style="background-color:rgb(180, 180, 180);">rgb(180, 180, 180)</h2>
+<h2 style="background-color:rgb(210, 210, 210);">rgb(210, 210, 210)</h2>
+<h2 style="background-color:rgb(240, 240, 240);">rgb(240, 240, 240)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:rgb(60, 60, 60);">rgb(60, 60, 60)</h2>
+<h2 style="background-color:rgb(90, 90, 90);">rgb(90, 90, 90)</h2>
+<h2 style="background-color:rgb(120, 120, 120);">rgb(120, 120, 120)</h2>
+<h2 style="background-color:rgb(180, 180, 180);">rgb(180, 180, 180)</h2>
+<h2 style="background-color:rgb(210, 210, 210);">rgb(210, 210, 210)</h2>
+<h2 style="background-color:rgb(240, 240, 240);">rgb(240, 240, 240)</h2>
+```
+
+#### Valores RGBA
+RGBA es una extensión de los colores RGB con un nuevo canal, el *alpha* y este especifica la opacidad de un color:
+Según la [RAE](https://dle.rae.es/opacidad?m=form):
+![opaco-definicion](./img/definicion_opaco.png)
+
+<h2 style="background-color:rgba(255, 99, 71, 0);">rgba(255, 99, 71, 0)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.2);">rgba(255, 99, 71, 0.2)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.4);">rgba(255, 99, 71, 0.4)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.6);">rgba(255, 99, 71, 0.6)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.8);">rgba(255, 99, 71, 0.8)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 1);">rgba(255, 99, 71, 1)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:rgba(255, 99, 71, 0);">rgba(255, 99, 71, 0)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.2);">rgba(255, 99, 71, 0.2)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.4);">rgba(255, 99, 71, 0.4)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.6);">rgba(255, 99, 71, 0.6)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 0.8);">rgba(255, 99, 71, 0.8)</h2>
+<h2 style="background-color:rgba(255, 99, 71, 1);">rgba(255, 99, 71, 1)</h2>
+```
+
+#### Colores en Hexadecimal
+Un color hexadecimal es especicado de la siguiente manera:
+
+| #RRGGBB | Donde RR(red) | GG(green) | BB(blue) |
+|---------|---------------|-----------|----------|
+
+**#rrggbb**
+
+Donde rr (red), gg (gree), bb (blue) son valores hexadecimales entre 00 y ff (lo mismo que 0-255).
+
+Por ejemplo, #ff0000 es rojo, porque el más alto valor es (ff) y los otros son los más bajos (00).
+
+Para mostrar el negro, se usa 00 en todos, #000000
+
+Para mostrar blanco, se usa ff ent todos, #ffffff
+
+[¡Prueba en línea!](https://www.w3schools.com/css/css_colors_hex.asp)
+
+<h2 style="background-color:#ff0000;">#ff0000</h2>
+<h2 style="background-color:#0000ff;">#0000ff</h2>
+<h2 style="background-color:#3cb371;">#3cb371</h2>
+<h2 style="background-color:#ee82ee;">#ee82ee</h2>
+<h2 style="background-color:#ffa500;">#ffa500</h2>
+<h2 style="background-color:#6a5acd;">#6a5acd</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:#ff0000;">#ff0000</h2>
+<h2 style="background-color:#0000ff;">#0000ff</h2>
+<h2 style="background-color:#3cb371;">#3cb371</h2>
+<h2 style="background-color:#ee82ee;">#ee82ee</h2>
+<h2 style="background-color:#ffa500;">#ffa500</h2>
+<h2 style="background-color:#6a5acd;">#6a5acd</h2>
+```
+
+La escala de grises:
+<h2 style="background-color:#3c3c3c;">#3c3c3c</h2>
+<h2 style="background-color:#616161;">#616161</h2>
+<h2 style="background-color:#787878;">#787878</h2>
+<h2 style="background-color:#b4b4b4;">#b4b4b4</h2>
+<h2 style="background-color:#f0f0f0;">#f0f0f0</h2>
+<h2 style="background-color:#f9f9f9;">#f9f9f9</h2>
+
+```html
+<h2 style="background-color:#3c3c3c;">#3c3c3c</h2>
+<h2 style="background-color:#616161;">#616161</h2>
+<h2 style="background-color:#787878;">#787878</h2>
+<h2 style="background-color:#b4b4b4;">#b4b4b4</h2>
+<h2 style="background-color:#f0f0f0;">#f0f0f0</h2>
+<h2 style="background-color:#f9f9f9;">#f9f9f9</h2>
+```
+
+#### Valores de 3 dígitos
+A veces es posible ver 3 dígitos de código hexadecimal.
+
+Estos tres dígitos son una forma corta de usar en vez de seis.
+
+Estos siguen la misma forma que rgb:
+
+**#rgb**
+
+Donde r, g, b son red, green y blue que pueden ser valores entre 0 y f.
+
+Los tres dígitos únicamente pueden ser usados por (RR, GG, BB) en un mismo componente. Entonces, si tenemos #ff00cc, podría ser #f0c.
+
+Ejemplo:
+
+```css
+body {
+  background-color: #fc9; /* same as #ffcc99 */
+}
+
+h1 {
+  color: #f0f; /* same as #ff00ff */
+}
+
+p {
+  color: #b58; /* same as #bb5588 */
+}
+```
+[¡Prueba en línea!](https://www.w3schools.com/css/tryit.asp?filename=trycss_color_hex_3digit)
+
+#### Colores HSL
+HSL significa hue(color, matiz), saturation(saturación) y lightness(luminosidad)
+
+**hsl(hue, saturation, lightness)**
+
+Hue es el grado de color entre 0 a 360. 0 es red, 120 es green y 240 es blue.
+
+La saturación es el porcentaje. 0% para grises y 100% para color completo.
+
+Lightness también es porcentaje. 0% es negro, 50% ni claro ni oscuro, 100% es blanco.
+
+[¡Prueba en línea!](https://www.w3schools.com/css/css_colors_hsl.asp)
+
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(240, 100%, 50%);">hsl(240, 100%, 50%)</h2>
+<h2 style="background-color:hsl(147, 50%, 47%);">hsl(147, 50%, 47%)</h2>
+<h2 style="background-color:hsl(300, 76%, 72%);">hsl(300, 76%, 72%)</h2>
+<h2 style="background-color:hsl(39, 100%, 50%);">hsl(39, 100%, 50%)</h2>
+<h2 style="background-color:hsl(248, 53%, 58%);">hsl(248, 53%, 58%)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(240, 100%, 50%);">hsl(240, 100%, 50%)</h2>
+<h2 style="background-color:hsl(147, 50%, 47%);">hsl(147, 50%, 47%)</h2>
+<h2 style="background-color:hsl(300, 76%, 72%);">hsl(300, 76%, 72%)</h2>
+<h2 style="background-color:hsl(39, 100%, 50%);">hsl(39, 100%, 50%)</h2>
+<h2 style="background-color:hsl(248, 53%, 58%);">hsl(248, 53%, 58%)</h2>
+```
+
+#### Saturation
+La saturación es la intensidad de un color
+
+100% es color puro, sin escala de grises.
+
+50% es 50% de gris, pero el color aún se puede ver.
+
+0% es completamente gris, no se ve el color.
+
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(0, 80%, 50%);">hsl(0, 80%, 50%)</h2>
+<h2 style="background-color:hsl(0, 60%, 50%);">hsl(0, 60%, 50%)</h2>
+<h2 style="background-color:hsl(0, 40%, 50%);">hsl(0, 40%, 50%)</h2>
+<h2 style="background-color:hsl(0, 20%, 50%);">hsl(0, 20%, 50%)</h2>
+<h2 style="background-color:hsl(0, 0%, 50%);">hsl(0, 0%, 50%)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(0, 80%, 50%);">hsl(0, 80%, 50%)</h2>
+<h2 style="background-color:hsl(0, 60%, 50%);">hsl(0, 60%, 50%)</h2>
+<h2 style="background-color:hsl(0, 40%, 50%);">hsl(0, 40%, 50%)</h2>
+<h2 style="background-color:hsl(0, 20%, 50%);">hsl(0, 20%, 50%)</h2>
+<h2 style="background-color:hsl(0, 0%, 50%);">hsl(0, 0%, 50%)</h2>
+```
+
+#### Lightness
+La luminosidad es cuanta luz tiene un color, donde 0% es sin luz (negro), 50% es ni oscuro ni claro y 100% es completo.
+
+<h2 style="background-color:hsl(0, 100%, 0%);">hsl(0, 100%, 0%)</h2>
+<h2 style="background-color:hsl(0, 100%, 25%);">hsl(0, 100%, 25%)</h2>
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(0, 100%, 75%);">hsl(0, 100%, 75%)</h2>
+<h2 style="background-color:hsl(0, 100%, 90%);">hsl(0, 100%, 90%)</h2>
+<h2 style="background-color:hsl(0, 100%, 100%);">hsl(0, 100%, 100%)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:hsl(0, 100%, 0%);">hsl(0, 100%, 0%)</h2>
+<h2 style="background-color:hsl(0, 100%, 25%);">hsl(0, 100%, 25%)</h2>
+<h2 style="background-color:hsl(0, 100%, 50%);">hsl(0, 100%, 50%)</h2>
+<h2 style="background-color:hsl(0, 100%, 75%);">hsl(0, 100%, 75%)</h2>
+<h2 style="background-color:hsl(0, 100%, 90%);">hsl(0, 100%, 90%)</h2>
+<h2 style="background-color:hsl(0, 100%, 100%);">hsl(0, 100%, 100%)</h2>
+```
+
+### Escala de grises
+La escala de grises es a menudo definida por el hue, saturación a 0, y luminisodadid de 0% a 100% para obtener algo más oscuro o claro.
+<h2 style="background-color:hsl(0, 0%, 0%);">hsl(0, 0%, 0%)</h2>
+<h2 style="background-color:hsl(0, 0%, 24%);">hsl(0, 0%, 24%)</h2>
+<h2 style="background-color:hsl(0, 0%, 47%);">hsl(0, 0%, 47%)</h2>
+<h2 style="background-color:hsl(0, 0%, 71%);">hsl(0, 0%, 71%)</h2>
+<h2 style="background-color:hsl(0, 0%, 94%);">hsl(0, 0%, 94%)</h2>
+<h2 style="background-color:hsl(0, 0%, 100%);">hsl(0, 0%, 100%)</h2>
+
+```html
+<h2 style="background-color:hsl(0, 0%, 0%);">hsl(0, 0%, 0%)</h2>
+<h2 style="background-color:hsl(0, 0%, 24%);">hsl(0, 0%, 24%)</h2>
+<h2 style="background-color:hsl(0, 0%, 47%);">hsl(0, 0%, 47%)</h2>
+<h2 style="background-color:hsl(0, 0%, 71%);">hsl(0, 0%, 71%)</h2>
+<h2 style="background-color:hsl(0, 0%, 94%);">hsl(0, 0%, 94%)</h2>
+<h2 style="background-color:hsl(0, 0%, 100%);">hsl(0, 0%, 100%)</h2>
+```
+
+#### El valor alpha
+
+**hsla(hue, saturation, lightness, alpha)**
+
+Este indica la transparencia, 0.0 es completamente transparente y 1.0 no tan transparente.
+
+[¡Prueba en línea!](https://www.w3schools.com/css/css_colors_hsl.asp)
+
+<h2 style="background-color:hsla(9, 100%, 64%, 0);">hsla(9, 100%, 64%, 0)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.2);">hsla(9, 100%, 64%, 0.2)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.4);">hsla(9, 100%, 64%, 0.4)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.6);">hsla(9, 100%, 64%, 0.6)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.8);">hsla(9, 100%, 64%, 0.8)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 1);">hsla(9, 100%, 64%, 1)</h2>
+
+Ejemplo:
+```html
+<h2 style="background-color:hsla(9, 100%, 64%, 0);">hsla(9, 100%, 64%, 0)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.2);">hsla(9, 100%, 64%, 0.2)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.4);">hsla(9, 100%, 64%, 0.4)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.6);">hsla(9, 100%, 64%, 0.6)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 0.8);">hsla(9, 100%, 64%, 0.8)</h2>
+<h2 style="background-color:hsla(9, 100%, 64%, 1);">hsla(9, 100%, 64%, 1)</h2>
+```
