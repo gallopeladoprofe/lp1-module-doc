@@ -4245,3 +4245,40 @@ Uno
 Dos
 Tres
 ```
+
+### async/await
+Ya vimos la sintaxys de Promise. Con `async` podemos crear una función que retorna una Promise. Esto crea una Promise más bonita de leer y luce muy parecido a un código asíncrono. Podemos usar esta promesa así como aprendimos en la sección anterior, o usar la todopoderosa `await` para esperar que la promesa termine. `await` solamente trabaja una función asíncrona.
+
+En un contexto asíncrono, podemos esperar otras promesas también, así como vemos en este ejemplo:
+
+```javascript
+function decirAlgo(x) {
+    return new Promise(resolve => {
+        setTimeout(()=>{
+            resolve("algo " + x);
+        }, 2000);
+    });
+}
+
+async function hablar(x) {
+    const palabras = await decirAlgo(x);
+    console.log(palabras);
+}
+
+hablar(2);
+hablar(4);
+hablar(8);
+
+```
+
+¿Puedes descubrir qué hace este código? Llamamamos a la función asíncrona `hablar()` tres veces. Cada una de estas funciones está esperando el `decirAlgo()`. La función `decirAlgo()` contiene una nueva promesa que está siendo resuelta con un `setTimeout()` que espera dos segundos antes de resolver con el valor de algo más x. Entonces, después de dos segundos, las tres funciones terminan al mismo tiempo (o parecen así para el ojo humano).
+
+Si la función `hablar()` no fuere asíncrona, lanzaría un *SyntaxError* por la palabra `await`. `await` es válida solamente para funciones asíncronas, entonces `hablar()` debe ser asíncrona. Sin `async` y `await` en este ejemplo, se guardaría el resultado de la función `decirAlgo()` como una Promise pendiente, en `palabras` y el log una vez por cada llamada de función:
+
+```javascript
+Promise { <pending> }
+Promise { <pending> }
+Promise { <pending> }
+```
+Hemos visto los bloques básicos de la concurrencia. Esto debería prepararte para trabajar con la concurrencia en la vida real. La Concurrencia es un tema realmente avanzado; debuggear es uno de los grandes problemas, pero vale la pena en terminos de rendimiento cuando son aplicadas en el momento correcto.
+
